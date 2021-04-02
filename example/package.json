@@ -6,9 +6,6 @@
   "author": "David Knezić <davidknezic@gmail.com>",
   "homepage": "https://github.com/pocketbitcoin/xsd-tools/tree/main/example#readme",
   "license": "MIT",
-  "publishConfig": {
-    "registry": "https://registry.yarnpkg.com"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pocketbitcoin/xsd-tools.git"
