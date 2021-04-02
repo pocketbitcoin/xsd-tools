@@ -1,6 +1,6 @@
 {
   "name": "xsd-tools",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Essentials for schema-driven, type-safe XML processing",
   "keywords": [
     "xsd",
