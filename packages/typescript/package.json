@@ -14,12 +14,8 @@
   "homepage": "https://github.com/pocketbitcoin/xsd-tools",
   "license": "MIT",
   "main": "dist/index.js",
-  "directories": {
-    "lib": "lib",
-    "test": "tests"
-  },
   "files": [
-    "src"
+    "dist"
   ],
   "bin": {
     "xsd-ts": "dist/bin/xsd-ts.js"
