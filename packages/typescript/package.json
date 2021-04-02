@@ -1,0 +1,60 @@
+{
+  "name": "@xsd-tools/typescript",
+  "version": "0.0.0",
+  "description": "Schema-driven XML parser generator for TypeScript",
+  "keywords": [
+    "xsd",
+    "schema",
+    "xml",
+    "processing",
+    "parser",
+    "typescript"
+  ],
+  "author": "David Knezić <davidknezic@gmail.com>",
+  "homepage": "https://github.com/pocketbitcoin/xsd-tools",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "files": [
+    "src"
+  ],
+  "bin": {
+    "xsd-ts": "dist/bin/xsd-ts.js"
+  },
+  "publishConfig": {
+    "registry": "https://registry.yarnpkg.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pocketbitcoin/xsd-tools.git"
+  },
+  "scripts": {
+    "xsd-ts": "ts-node src/bin/xsd-ts.ts",
+    "build": "tsc",
+    "prepublish": "npm run build",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/pocketbitcoin/xsd-tools/issues"
+  },
+  "peerDependencies": {
+    "typescript": "^4.2.3",
+    "xsd-tools": "^0.0.0"
+  },
+  "dependencies": {
+    "commander": "^7.2.0",
+    "node-fetch": "^2.6.1",
+    "unzipper": "^0.10.11",
+    "xmldom": "^0.5.0"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.5.8",
+    "@types/unzipper": "^0.10.3",
+    "@types/xmldom": "^0.1.30",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3"
+  }
+}
