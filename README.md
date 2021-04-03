@@ -1,4 +1,4 @@
-<img align="left" alt="xsd tools logo" width="128" src="https://user-images.githubusercontent.com/198988/113361967-8b136100-934d-11eb-8da0-58c96c900099.png" />
+<img align="left" alt="xsd tools logo" width="128" src="https://user-images.githubusercontent.com/198988/113477148-43d9bd00-9480-11eb-9587-97a0dcaa0af9.png" />
 
 # `xsd-tools`
 
