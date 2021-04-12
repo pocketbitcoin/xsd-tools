@@ -359,6 +359,11 @@ xmldom@^0.5.0:
   resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.5.0.tgz#193cb96b84aa3486127ea6272c4596354cb4962e"
   integrity sha512-Foaj5FXVzgn7xFzsKeNIde9g6aFBxTPi37iwsno8QvApmtg7KYrr+OPyRHcJF7dud2a5nGRBXK3n0dL62Gf7PA==
 
+xsd-tools@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/xsd-tools/-/xsd-tools-0.0.3.tgz#3f66c4309b404c969a7214ad832091d37b0c25b9"
+  integrity sha512-K7u0TGUhgCeNErcRh8rkJBCCaaibEEyE60Wuj/UFrL4eVODZr7nWLg17zCwe39WZbw+INaTSsrzm9ss7DmbkQw==
+
 yn@3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/yn/-/yn-3.1.1.tgz#1e87401a09d767c1d5eab26a6e4c185182d2eb50"
