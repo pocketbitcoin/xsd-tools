@@ -38,8 +38,8 @@
     "url": "https://github.com/pocketbitcoin/xsd-tools/issues"
   },
   "peerDependencies": {
-    "typescript": "^4.2.3",
-    "xsd-tools": "^0.0.0"
+    "typescript": "^4.0.0",
+    "xsd-tools": "^0.1.0"
   },
   "dependencies": {
     "commander": "^7.2.0",
