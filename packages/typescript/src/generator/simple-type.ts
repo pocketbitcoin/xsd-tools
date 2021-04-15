@@ -10,6 +10,8 @@ export function generateFromSimpleType(xsSimpleType: XsSimpleType) {
     typeNode = ts.factory.createUnionTypeNode(xsRestriction.xsEnumeration.map((xsEnumeration) => ts.factory.createLiteralTypeNode(ts.factory.createStringLiteral(xsEnumeration['@value']))));
   } else if (xsRestriction['@base'] === 'xs:string') {
     typeNode = ts.factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword);
+  } else if (xsRestriction['@base'] === 'xs:integer') {
+    typeNode = ts.factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword);
   } else if (xsRestriction['@base'] === 'xs:decimal') {
     typeNode = ts.factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword);
   } else if (xsRestriction['@base'] === 'xs:boolean') {
