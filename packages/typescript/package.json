@@ -29,6 +29,7 @@
     "url": "git+https://github.com/pocketbitcoin/xsd-tools.git"
   },
   "scripts": {
+    "dev": "yarn tsc --watch",
     "xsd-ts": "ts-node src/bin/xsd-ts.ts",
     "build": "tsc",
     "prepublish": "npm run build",

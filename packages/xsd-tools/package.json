@@ -24,8 +24,9 @@
     "url": "git+https://github.com/pocketbitcoin/xsd-tools.git"
   },
   "scripts": {
-    "compile": "tsc",
-    "prepublish": "npm run compile",
+    "dev": "yarn tsc --watch",
+    "build": "tsc",
+    "prepublish": "npm run build",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
