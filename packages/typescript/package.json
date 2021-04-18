@@ -1,6 +1,6 @@
 {
   "name": "@xsd-tools/typescript",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Schema-driven XML parser generator for TypeScript",
   "keywords": [
     "xsd",
@@ -54,6 +54,6 @@
     "@types/xmldom": "^0.1.30",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4",
-    "xsd-tools": "^0.1.0"
+    "xsd-tools": "^0.1.1"
   }
 }
