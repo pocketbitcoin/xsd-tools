@@ -20,12 +20,12 @@ export function generate(doc: Document) {
 
   const importStatement = ts.factory.createImportDeclaration(
     undefined,
-    undefined,
     ts.factory.createImportClause(
       false,
       undefined,
       ts.factory.createNamedImports([
         ts.factory.createImportSpecifier(
+          false,
           undefined,
           ts.factory.createIdentifier('parse')
         ),
@@ -39,7 +39,6 @@ export function generate(doc: Document) {
   const file = printer.printList(ts.ListFormat.MultiLine, ts.factory.createNodeArray([
     importStatement,
     ts.factory.createTypeAliasDeclaration(
-      undefined,
       [ts.factory.createModifier(ts.SyntaxKind.ExportKeyword)],
       ts.factory.createIdentifier('_'),
       undefined,
@@ -50,7 +49,6 @@ export function generate(doc: Document) {
     ...simpleTypes,
     ...complexTypes,
     ts.factory.createFunctionDeclaration(
-      undefined,
       [
         ts.factory.createModifier(ts.SyntaxKind.ExportKeyword),
         ts.factory.createModifier(ts.SyntaxKind.DefaultKeyword)
@@ -59,7 +57,6 @@ export function generate(doc: Document) {
       undefined,
       undefined,
       [ts.factory.createParameterDeclaration(
-        undefined,
         undefined,
         undefined,
         ts.factory.createIdentifier('doc'),

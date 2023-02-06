@@ -29,7 +29,7 @@
     "url": "git+https://github.com/pocketbitcoin/xsd-tools.git"
   },
   "scripts": {
-    "dev": "yarn tsc --watch",
+    "dev": "tsc --watch",
     "xsd-ts": "ts-node src/bin/xsd-ts.ts",
     "build": "tsc",
     "prepublish": "npm run build",
@@ -43,17 +43,17 @@
     "xsd-tools": "^0.1.0"
   },
   "dependencies": {
-    "commander": "^7.2.0",
-    "node-fetch": "^2.6.1",
+    "commander": "^10.0.0",
+    "node-fetch": "^2.0.0",
     "unzipper": "^0.10.11",
-    "xmldom": "^0.5.0"
+    "xmldom": "^0.6.0"
   },
   "devDependencies": {
-    "@types/node-fetch": "^2.5.10",
-    "@types/unzipper": "^0.10.3",
-    "@types/xmldom": "^0.1.30",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.2.4",
+    "@types/node-fetch": "^2.0.0",
+    "@types/unzipper": "^0.10.5",
+    "@types/xmldom": "^0.1.31",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5",
     "xsd-tools": "^0.1.1"
   }
 }

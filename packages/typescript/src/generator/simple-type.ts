@@ -27,7 +27,6 @@ export function generateFromSimpleType(xsSimpleType: XsSimpleType) {
   }
 
   return ts.factory.createTypeAliasDeclaration(
-    undefined,
     [ts.factory.createModifier(ts.SyntaxKind.ExportKeyword)],
     ts.factory.createIdentifier(xsSimpleType['@name'] || '_'),
     undefined,

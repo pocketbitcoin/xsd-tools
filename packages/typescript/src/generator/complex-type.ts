@@ -18,7 +18,6 @@ export function generateFromComplexType(xsComplexType: XsComplexType) {
   }
 
   return ts.factory.createTypeAliasDeclaration(
-    undefined,
     [ts.factory.createModifier(ts.SyntaxKind.ExportKeyword)],
     ts.factory.createIdentifier(xsComplexType['@name'] || '_'),
     undefined,
