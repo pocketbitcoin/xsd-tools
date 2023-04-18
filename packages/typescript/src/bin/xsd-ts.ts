@@ -3,7 +3,7 @@
 import { writeFileSync } from 'fs';
 import { resolve } from 'path';
 import { Command } from 'commander';
-import { DOMParser } from 'xmldom';
+import { DOMParser } from '@xmldom/xmldom';
 import { generate } from '../generate';
 import fetchFile from '../fetch';
 

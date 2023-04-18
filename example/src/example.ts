@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import { DOMParser } from 'xmldom';
+import { DOMParser } from '@xmldom/xmldom';
 import parse from './greeting';
 
 const xml = readFileSync(resolve(__dirname, '../greeting.xml'), 'utf8');
