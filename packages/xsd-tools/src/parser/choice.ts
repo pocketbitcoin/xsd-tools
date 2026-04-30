@@ -1,6 +1,6 @@
-import { XsSchema, XsChoice } from '../schema';
-import { ValidationError } from './error';
-import { parseWithXsSequence } from './sequence';
+import type { XsSchema, XsChoice } from '../schema/index.js';
+import { ValidationError } from './error.js';
+import { parseWithXsSequence } from './sequence.js';
 
 export function parseWithXsChoice(element: Element, xsChoice: XsChoice, xsSchema: XsSchema) {
   if ('xsElement' in xsChoice) {

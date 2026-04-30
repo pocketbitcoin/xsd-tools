@@ -1,9 +1,5 @@
 {
   "name": "@xsd-tools/monorepo",
-  "workspaces": [
-    "packages/*",
-    "example"
-  ],
   "private": true,
   "version": "0.0.0",
   "description": "Essentials for schema-driven, type-safe XML processing",
@@ -22,15 +18,16 @@
     "url": "git+https://github.com/pocketbitcoin/xsd-tools.git"
   },
   "scripts": {
-    "test": "jest"
+    "build": "turbo build",
+    "test": "vitest run"
   },
   "bugs": {
     "url": "https://github.com/pocketbitcoin/xsd-tools/issues"
   },
   "devDependencies": {
-    "jest": "^29.4.1",
-    "lerna": "^6.4.1",
-    "ts-jest": "^29.0.5",
-    "typescript": "^4.9.5"
-  }
+    "turbo": "^2.9.6",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "packageManager": "pnpm@10.33.0"
 }

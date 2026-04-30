@@ -1,9 +1,9 @@
 import ts from 'typescript';
-import { parse, XsSchema } from 'xsd-tools';
-import { generateFromChoice } from './generator/choice';
-import { generateFromComplexType } from './generator/complex-type';
-import { generateFromSimpleType } from './generator/simple-type';
-import { objectToAst } from './object-to-ast';
+import { parse, type XsSchema } from 'xsd-tools';
+import { generateFromChoice } from './generator/choice.js';
+import { generateFromComplexType } from './generator/complex-type.js';
+import { generateFromSimpleType } from './generator/simple-type.js';
+import { objectToAst } from './object-to-ast.js';
 
 export function generate(doc: Document) {
   const { xsSchema } = parse(doc) as { xsSchema: XsSchema };

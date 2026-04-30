@@ -14,7 +14,7 @@ export default async function fetchFile(path: string) {
 
         const zip = unzipper.ParseOne(/\.xsd$/);
 
-        res.body.pipe(zip);
+        res.body?.pipe(zip);
 
         zip.on('data', (data) => {
           buffer.push(data.toString());

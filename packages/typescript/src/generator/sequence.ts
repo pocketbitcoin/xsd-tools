@@ -1,5 +1,5 @@
 import ts from 'typescript';
-import { XsSequence } from 'xsd-tools';
+import type { XsSequence } from 'xsd-tools';
 
 export function generateFromSequence(xsSequence: XsSequence) {
   if (xsSequence.xsAny) {
@@ -10,7 +10,7 @@ export function generateFromSequence(xsSequence: XsSequence) {
     let typeNode: ts.TypeNode;
     let optional: boolean;
 
-    if (e['@maxOccurs'] > 1 || e['@maxOccurs'] === 'unbounded') {
+    if (typeof e['@maxOccurs'] === 'number' && e['@maxOccurs'] > 1 || e['@maxOccurs'] === 'unbounded') {
       const typeReferenceNode = ts.factory.createTypeReferenceNode(
         ts.factory.createIdentifier(e['@type']),
         undefined

@@ -1,5 +1,5 @@
 import ts from 'typescript';
-import { XsSimpleContent } from 'xsd-tools';
+import type { XsSimpleContent } from 'xsd-tools';
 
 export function generateFromSimpleContent(xsSimpleContent: XsSimpleContent) {
   const { xsExtension } = xsSimpleContent;

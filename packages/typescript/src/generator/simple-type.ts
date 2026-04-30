@@ -1,5 +1,5 @@
-import ts, { TypeNode } from 'typescript';
-import { XsSimpleType } from 'xsd-tools';
+import ts, { type TypeNode } from 'typescript';
+import type { XsSimpleType } from 'xsd-tools';
 
 export function generateFromSimpleType(xsSimpleType: XsSimpleType) {
   let typeNode: TypeNode;

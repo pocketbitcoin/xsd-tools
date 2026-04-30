@@ -10,13 +10,13 @@
 
 ```sh
 # install the generator and dependencies
-yarn add xsd-tools xmldom
-yarn add -D @xsd-tools/typescript
+pnpm add xsd-tools xmldom
+pnpm add -D @xsd-tools/typescript
 ```
 
 ```sh
 # generate types and parser based on xml schema
-yarn run xsd-ts example/greeting.xsd example/greeting.ts
+pnpm xsd-ts example/greeting.xsd example/greeting.ts
 ```
 
 ```ts

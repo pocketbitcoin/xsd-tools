@@ -1,9 +1,9 @@
 import { readFileSync } from 'fs';
-import { resolve } from 'path';
 import { DOMParser } from 'xmldom';
-import parse from './greeting';
+import parse from './greeting.js';
 
-const xml = readFileSync(resolve(__dirname, '../greeting.xml'), 'utf8');
+const file = new URL('../greeting.xml', import.meta.url);
+const xml = readFileSync(file, 'utf8');
 
 const dom = new DOMParser().parseFromString(xml, 'text/xml');
 

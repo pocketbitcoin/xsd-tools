@@ -1,6 +1,6 @@
-import { parseWithXsSchema } from './schema';
-import { XsSchema, xsdSchema } from '../schema';
-import { ValidationError } from './error';
+import { parseWithXsSchema } from './schema.js';
+import { type XsSchema, xsdSchema } from '../schema/index.js';
+import { ValidationError } from './error.js';
 
 export function parse(document: Document, schema?: XsSchema) {
   const effectiveSchema = schema || xsdSchema;

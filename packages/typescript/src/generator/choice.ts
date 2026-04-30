@@ -1,6 +1,6 @@
 import ts from 'typescript';
-import { XsChoice } from 'xsd-tools';
-import { generateFromSequence } from './sequence';
+import type { XsChoice } from 'xsd-tools';
+import { generateFromSequence } from './sequence.js';
 
 export function generateFromChoice(xsChoice: XsChoice) {
   if ('xsElement' in xsChoice) {
