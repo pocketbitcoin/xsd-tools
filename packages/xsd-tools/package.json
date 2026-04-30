@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@types/xmldom": "catalog:",
+    "typescript": "catalog:",
     "xmldom": "catalog:"
   }
 }

@@ -20,7 +20,8 @@
   "scripts": {
     "build": "pnpm -r build",
     "test": "pnpm -r test",
-    "check-types": "pnpm -r check-types"
+    "check-types": "pnpm -r check-types",
+    "publish": "pnpm -r publish --access public"
   },
   "bugs": {
     "url": "https://github.com/pocketbitcoin/xsd-tools/issues"
