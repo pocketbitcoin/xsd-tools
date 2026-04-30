@@ -21,7 +21,7 @@
     "build": "pnpm -r build",
     "test": "pnpm -r test",
     "check-types": "pnpm -r check-types",
-    "publish": "pnpm -r publish --access public"
+    "publish-all": "pnpm publish --filter \"./packages/*\" --access public"
   },
   "bugs": {
     "url": "https://github.com/pocketbitcoin/xsd-tools/issues"
