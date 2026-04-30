@@ -1,7 +1,15 @@
 {
   "name": "xsd-tools",
+  "version": "0.3.0",
   "type": "module",
-  "version": "0.2.0",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+
   "description": "Essentials for schema-driven, type-safe XML processing",
   "keywords": [
     "xsd",
@@ -13,7 +21,6 @@
   "author": "David Knezić <davidknezic@gmail.com>",
   "homepage": "https://github.com/pocketbitcoin/xsd-tools",
   "license": "MIT",
-  "main": "dist/index.js",
   "files": [
     "dist"
   ],
@@ -28,14 +35,14 @@
     "dev": "tsc --watch",
     "build": "tsc",
     "prepublish": "npm run build",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "check-types": "tsc --noEmit"
   },
   "bugs": {
     "url": "https://github.com/pocketbitcoin/xsd-tools/issues"
   },
   "devDependencies": {
     "@types/xmldom": "catalog:",
-    "typescript": "catalog:",
     "xmldom": "catalog:"
   }
 }

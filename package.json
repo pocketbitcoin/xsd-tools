@@ -18,16 +18,15 @@
     "url": "git+https://github.com/pocketbitcoin/xsd-tools.git"
   },
   "scripts": {
-    "build": "turbo build",
-    "test": "vitest run"
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "check-types": "pnpm -r check-types"
   },
   "bugs": {
     "url": "https://github.com/pocketbitcoin/xsd-tools/issues"
   },
   "devDependencies": {
-    "turbo": "^2.9.6",
-    "typescript": "catalog:",
-    "vitest": "catalog:"
+    "typescript": "catalog:"
   },
   "packageManager": "pnpm@10.33.0"
 }

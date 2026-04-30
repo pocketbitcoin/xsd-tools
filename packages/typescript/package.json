@@ -1,7 +1,14 @@
 {
   "name": "@xsd-tools/typescript",
+  "version": "0.3.0",
   "type": "module",
-  "version": "0.2.0",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "description": "Schema-driven XML parser generator for TypeScript",
   "keywords": [
     "xsd",
@@ -14,7 +21,6 @@
   "author": "David Knezić <davidknezic@gmail.com>",
   "homepage": "https://github.com/pocketbitcoin/xsd-tools",
   "license": "MIT",
-  "main": "dist/index.js",
   "files": [
     "dist"
   ],
@@ -34,7 +40,8 @@
     "xsd-ts": "tsx src/bin/xsd-ts.ts",
     "build": "tsc",
     "prepublish": "npm run build",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "check-types": "tsc --noEmit"
   },
   "bugs": {
     "url": "https://github.com/pocketbitcoin/xsd-tools/issues"
@@ -44,17 +51,15 @@
     "xsd-tools": "workspace:*"
   },
   "dependencies": {
-    "commander": "^14",
-    "node-fetch": "^3",
-    "unzipper": "^0.12.3",
+    "commander": "14.0.3",
+    "unzipper": "0.12.3",
     "xmldom": "catalog:"
   },
   "devDependencies": {
     "@types/node": "catalog:",
-    "@types/unzipper": "^0.10.11",
+    "@types/unzipper": "0.10.11",
     "@types/xmldom": "catalog:",
     "tsx": "catalog:",
-    "typescript": "catalog:",
     "xsd-tools": "workspace:*"
   }
 }
