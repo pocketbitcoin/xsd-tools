@@ -1,7 +1,7 @@
-import { parseWithXsSimpleType } from './simple-type';
-import { XsSchema, XsSimpleContent } from '../schema';
-import { camelCase } from './utils';
-import { parseWithXsAttribute } from './attribute';
+import { parseWithXsSimpleType } from './simple-type.js';
+import type { XsSchema, XsSimpleContent } from '../schema/index.js';
+import { camelCase } from './utils.js';
+import { parseWithXsAttribute } from './attribute.js';
 
 export function parseWithXsSimpleContent(element: Element, xsSimpleContent: XsSimpleContent, xsSchema: XsSchema) {
   const { xsExtension } = xsSimpleContent;

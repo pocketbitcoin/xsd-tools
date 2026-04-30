@@ -1,8 +1,8 @@
 import ts from 'typescript';
-import { XsComplexType } from 'xsd-tools';
-import { generateFromChoice } from './choice';
-import { generateFromSequence } from './sequence';
-import { generateFromSimpleContent } from './simple-content';
+import type { XsComplexType } from 'xsd-tools';
+import { generateFromChoice } from './choice.js';
+import { generateFromSequence } from './sequence.js';
+import { generateFromSimpleContent } from './simple-content.js';
 
 export function generateFromComplexType(xsComplexType: XsComplexType) {
   let typeNode: ts.TypeNode;

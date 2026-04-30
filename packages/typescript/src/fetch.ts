@@ -1,5 +1,5 @@
-import { readFileSync } from 'fs';
-import fetch from 'node-fetch';
+import { readFileSync } from 'node:fs';
+import { Readable } from 'stream';
 import unzipper from 'unzipper';
 
 export default async function fetchFile(path: string) {
@@ -13,8 +13,7 @@ export default async function fetchFile(path: string) {
         let buffer = [] as string[];
 
         const zip = unzipper.ParseOne(/\.xsd$/);
-
-        res.body.pipe(zip);
+        Readable.fromWeb(res.body as any).pipe(zip);
 
         zip.on('data', (data) => {
           buffer.push(data.toString());

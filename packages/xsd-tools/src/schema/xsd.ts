@@ -1,4 +1,4 @@
-import { XsSchema } from '.';
+import type { XsSchema } from './index.js';
 
 export const schema: XsSchema = {
   xsElement: [{

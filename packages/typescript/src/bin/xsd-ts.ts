@@ -4,8 +4,8 @@ import { writeFileSync } from 'fs';
 import { resolve } from 'path';
 import { Command } from 'commander';
 import { DOMParser } from 'xmldom';
-import { generate } from '../generate';
-import fetchFile from '../fetch';
+import { generate } from '../generate.js';
+import fetchFile from '../fetch.js';
 
 const program = new Command();
 

@@ -1,5 +1,5 @@
-import { XsSchema, XsSimpleType } from '../schema';
-import { ValidationError } from './error';
+import type { XsSchema, XsSimpleType } from '../schema/index.js';
+import { ValidationError } from './error.js';
 
 export function parseWithXsSimpleType(element: Element, xsSimpleType: XsSimpleType, xsSchema: XsSchema) {
   if (!element) {

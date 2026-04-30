@@ -1,0 +1,10 @@
+packages:
+- 'example'
+- 'packages/*'
+
+catalog:
+  "@types/node": "^25.6"
+  "@types/xmldom": "^0.1"
+  tsx: "^4"
+  typescript: "^6"
+  xmldom: "^0.6"

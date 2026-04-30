@@ -1,5 +1,5 @@
-import { ValidationError } from './error';
-import { XsSchema, XsAttribute } from '../schema';
+import { ValidationError } from './error.js';
+import type { XsSchema, XsAttribute } from '../schema/index.js';
 
 export function parseWithXsAttribute(element: Element, xsAttribute: XsAttribute, xsSchema: XsSchema) {
   const value = element.getAttribute(xsAttribute['@name']) || xsAttribute['@default'] || null;

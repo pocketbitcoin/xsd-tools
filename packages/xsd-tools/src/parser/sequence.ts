@@ -1,13 +1,13 @@
-import { XsSchema, XsSequence } from '../schema';
-import { parseWithXsElement } from './element';
-import { ValidationError } from './error';
-import { camelCase } from './utils';
+import type { XsSchema, XsSequence } from '../schema/index.js';
+import { parseWithXsElement } from './element.js';
+import { ValidationError } from './error.js';
+import { camelCase } from './utils.js';
 
 export function parseWithXsSequence(element: Element, xsSequence: XsSequence, xsSchema: XsSchema) {
   const result = {} as any;
 
   for (const xsElement of xsSequence.xsElement) {
-    if (xsElement['@maxOccurs'] > 1 || xsElement['@maxOccurs'] === 'unbounded') {
+    if (typeof xsElement['@maxOccurs'] === 'number' && xsElement['@maxOccurs'] > 1 || xsElement['@maxOccurs'] === 'unbounded') {
       const list = [];
 
       for (let node = element.firstChild; node !== null; node = node.nextSibling) {

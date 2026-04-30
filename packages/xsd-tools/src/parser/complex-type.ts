@@ -1,9 +1,9 @@
-import { XsComplexType, XsSchema } from '../schema';
-import { parseWithXsAttribute } from './attribute';
-import { parseWithXsChoice } from './choice';
-import { parseWithXsSequence } from './sequence';
-import { parseWithXsSimpleContent } from './simple-content';
-import { camelCase } from './utils';
+import type { XsComplexType, XsSchema } from '../schema/index.js';
+import { parseWithXsAttribute } from './attribute.js';
+import { parseWithXsChoice } from './choice.js';
+import { parseWithXsSequence } from './sequence.js';
+import { parseWithXsSimpleContent } from './simple-content.js';
+import { camelCase } from './utils.js';
 
 export function parseWithXsComplexType(element: Element, xsComplexType: XsComplexType, xsSchema: XsSchema) {
   if ('xsSimpleContent' in xsComplexType) {
