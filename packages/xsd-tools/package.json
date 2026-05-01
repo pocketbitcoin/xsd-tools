@@ -1,6 +1,6 @@
 {
   "name": "xsd-tools",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "type": "module",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -41,9 +41,11 @@
   "bugs": {
     "url": "https://github.com/pocketbitcoin/xsd-tools/issues"
   },
+  "peerDependencies": {
+    "@xmldom/xmldom": "catalog:"
+  },
   "devDependencies": {
-    "@types/xmldom": "catalog:",
-    "typescript": "catalog:",
-    "xmldom": "catalog:"
+    "@xmldom/xmldom": "catalog:",
+    "typescript": "catalog:"
   }
 }

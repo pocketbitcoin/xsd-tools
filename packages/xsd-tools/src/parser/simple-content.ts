@@ -2,6 +2,7 @@ import { parseWithXsSimpleType } from './simple-type.js';
 import type { XsSchema, XsSimpleContent } from '../schema/index.js';
 import { camelCase } from './utils.js';
 import { parseWithXsAttribute } from './attribute.js';
+import type { Element } from '@xmldom/xmldom';
 
 export function parseWithXsSimpleContent(element: Element, xsSimpleContent: XsSimpleContent, xsSchema: XsSchema) {
   const { xsExtension } = xsSimpleContent;

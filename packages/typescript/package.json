@@ -1,6 +1,6 @@
 {
   "name": "@xsd-tools/typescript",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "type": "module",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -51,14 +51,13 @@
     "xsd-tools": "workspace:*"
   },
   "dependencies": {
+    "@xmldom/xmldom": "catalog:",
     "commander": "^14",
-    "unzipper": "^0.12",
-    "xmldom": "catalog:"
+    "unzipper": "^0.12"
   },
   "devDependencies": {
     "@types/node": "catalog:",
     "@types/unzipper": "^0.10",
-    "@types/xmldom": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:",
     "xsd-tools": "workspace:*"
