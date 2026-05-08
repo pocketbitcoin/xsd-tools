@@ -19,12 +19,11 @@
     "url": "https://github.com/pocketbitcoin/xsd-tools/issues"
   },
   "dependencies": {
-    "xmldom": "catalog:",
+    "@xmldom/xmldom": "catalog:",
     "xsd-tools": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "catalog:",
-    "@types/xmldom": "catalog:",
     "@xsd-tools/typescript": "workspace:*",
     "tsx": "catalog:",
     "typescript": "catalog:"

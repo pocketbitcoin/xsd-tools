@@ -1,5 +1,6 @@
 /* do not edit, but regenerate using xsd-tools */
 import { parse } from "xsd-tools";
+import type { Document } from "@xmldom/xmldom";
 export type _ = {
     greeting: Greeting;
 };
@@ -9,7 +10,7 @@ export type Greeting = {
     "#": Greeting_SimpleType;
     "@from"?: From;
 };
-export default function (doc: globalThis.Document) {
+export default function (doc: Document) {
     return parse(doc, { "xsElement": [
             { "@name": "greeting", "@type": "Greeting", "@minOccurs": 1, "@maxOccurs": 1 }
         ], "xsComplexType": [

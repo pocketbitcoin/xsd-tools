@@ -10,7 +10,7 @@
 
 ```sh
 # install the generator and dependencies
-pnpm add xsd-tools xmldom
+pnpm add xsd-tools @xmldom/xmldom@^0.9
 pnpm add -D @xsd-tools/typescript
 ```
 
@@ -22,7 +22,7 @@ pnpm xsd-ts example/greeting.xsd example/greeting.ts
 ```ts
 // feed xml dom into parser to get the typed valid object structure
 import { readFileSync } from 'fs';
-import { DOMParser } from 'xmldom';
+import { DOMParser } from '@xmldom/xmldom';
 import parse from './greeting.ts';
 
 const xml = readFileSync('example/greeting.xml', 'utf8');

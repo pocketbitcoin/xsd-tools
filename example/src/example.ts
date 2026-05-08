@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import { DOMParser } from 'xmldom';
+import { DOMParser } from '@xmldom/xmldom';
 import parse from './greeting.js';
 
 const file = new URL('../greeting.xml', import.meta.url);

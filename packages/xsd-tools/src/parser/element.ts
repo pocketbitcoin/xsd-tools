@@ -1,3 +1,4 @@
+import type { Element } from '@xmldom/xmldom';
 import type { XsElement, XsSchema } from '../schema/index.js';
 import { parseWithXsComplexType } from './complex-type.js';
 import { parseWithXsSimpleType } from './simple-type.js';

@@ -9,18 +9,15 @@ catalogs:
     '@types/node':
       specifier: ^25.6
       version: 25.6.0
-    '@types/xmldom':
-      specifier: ^0.1
-      version: 0.1.34
+    '@xmldom/xmldom':
+      specifier: ^0.9
+      version: 0.9.10
     tsx:
       specifier: ^4
       version: 4.21.0
     typescript:
       specifier: ^6
       version: 6.0.3
-    xmldom:
-      specifier: ^0.6
-      version: 0.6.0
 
 importers:
 
@@ -32,9 +29,9 @@ importers:
 
   example:
     dependencies:
-      xmldom:
+      '@xmldom/xmldom':
         specifier: 'catalog:'
-        version: 0.6.0
+        version: 0.9.10
       xsd-tools:
         specifier: workspace:*
         version: link:../packages/xsd-tools
@@ -42,9 +39,6 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 25.6.0
-      '@types/xmldom':
-        specifier: 'catalog:'
-        version: 0.1.34
       '@xsd-tools/typescript':
         specifier: workspace:*
         version: link:../packages/typescript
@@ -57,15 +51,15 @@ importers:
 
   packages/typescript:
     dependencies:
+      '@xmldom/xmldom':
+        specifier: 'catalog:'
+        version: 0.9.10
       commander:
         specifier: ^14
         version: 14.0.3
       unzipper:
         specifier: ^0.12
         version: 0.12.3
-      xmldom:
-        specifier: 'catalog:'
-        version: 0.6.0
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -73,9 +67,6 @@ importers:
       '@types/unzipper':
         specifier: ^0.10
         version: 0.10.11
-      '@types/xmldom':
-        specifier: 'catalog:'
-        version: 0.1.34
       tsx:
         specifier: 'catalog:'
         version: 4.21.0
@@ -88,15 +79,12 @@ importers:
 
   packages/xsd-tools:
     devDependencies:
-      '@types/xmldom':
+      '@xmldom/xmldom':
         specifier: 'catalog:'
-        version: 0.1.34
+        version: 0.9.10
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
-      xmldom:
-        specifier: 'catalog:'
-        version: 0.6.0
 
 packages:
 
@@ -262,8 +250,9 @@ packages:
   '@types/unzipper@0.10.11':
     resolution: {integrity: sha512-D25im2zjyMCcgL9ag6N46+wbtJBnXIr7SI4zHf9eJD2Dw2tEB5e+p5MYkrxKIVRscs5QV0EhtU9rgXSPx90oJg==}
 
-  '@types/xmldom@0.1.34':
-    resolution: {integrity: sha512-7eZFfxI9XHYjJJuugddV6N5YNeXgQE1lArWOcd1eCOKWb/FGs5SIjacSYuEJuwhsGS3gy4RuZ5EUIcqYscuPDA==}
+  '@xmldom/xmldom@0.9.10':
+    resolution: {integrity: sha512-A9gOqLdi6cV4ibazAjcQufGj0B1y/vDqYrcuP6d/6x8P27gRS8643Dj9o1dEKtB6O7fwxb2FgBmJS2mX7gpvdw==}
+    engines: {node: '>=14.6'}
 
   bluebird@3.7.2:
     resolution: {integrity: sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==}
@@ -347,10 +336,6 @@ packages:
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
-
-  xmldom@0.6.0:
-    resolution: {integrity: sha512-iAcin401y58LckRZ0TkI4k0VSM1Qg0KGSc3i8rU+xrxe19A/BN1zHyVSJY7uoutVlaTSzYyk/v5AmkewAP7jtg==}
-    engines: {node: '>=10.0.0'}
 
 snapshots:
 
@@ -440,7 +425,7 @@ snapshots:
     dependencies:
       '@types/node': 25.6.0
 
-  '@types/xmldom@0.1.34': {}
+  '@xmldom/xmldom@0.9.10': {}
 
   bluebird@3.7.2: {}
 
@@ -550,5 +535,3 @@ snapshots:
       node-int64: 0.4.0
 
   util-deprecate@1.0.2: {}
-
-  xmldom@0.6.0: {}

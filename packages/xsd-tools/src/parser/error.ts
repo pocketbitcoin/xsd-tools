@@ -1,3 +1,5 @@
+import type { Element } from "@xmldom/xmldom";
+
 export class ValidationError extends Error {
   element: Element;
   errors: ValidationError[];
