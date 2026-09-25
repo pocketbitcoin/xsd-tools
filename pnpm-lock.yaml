@@ -10,8 +10,8 @@ catalogs:
       specifier: ^25.6
       version: 25.6.0
     '@xmldom/xmldom':
-      specifier: ^0.9
-      version: 0.9.10
+      specifier: ^0.8.15
+      version: 0.8.15
     tsx:
       specifier: ^4
       version: 4.21.0
@@ -31,7 +31,7 @@ importers:
     dependencies:
       '@xmldom/xmldom':
         specifier: 'catalog:'
-        version: 0.9.10
+        version: 0.8.15
       xsd-tools:
         specifier: workspace:*
         version: link:../packages/xsd-tools
@@ -53,7 +53,7 @@ importers:
     dependencies:
       '@xmldom/xmldom':
         specifier: 'catalog:'
-        version: 0.9.10
+        version: 0.8.15
       commander:
         specifier: ^14
         version: 14.0.3
@@ -81,7 +81,7 @@ importers:
     devDependencies:
       '@xmldom/xmldom':
         specifier: 'catalog:'
-        version: 0.9.10
+        version: 0.8.15
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -250,9 +250,9 @@ packages:
   '@types/unzipper@0.10.11':
     resolution: {integrity: sha512-D25im2zjyMCcgL9ag6N46+wbtJBnXIr7SI4zHf9eJD2Dw2tEB5e+p5MYkrxKIVRscs5QV0EhtU9rgXSPx90oJg==}
 
-  '@xmldom/xmldom@0.9.10':
-    resolution: {integrity: sha512-A9gOqLdi6cV4ibazAjcQufGj0B1y/vDqYrcuP6d/6x8P27gRS8643Dj9o1dEKtB6O7fwxb2FgBmJS2mX7gpvdw==}
-    engines: {node: '>=14.6'}
+  '@xmldom/xmldom@0.8.15':
+    resolution: {integrity: sha512-/5NV/vDALVFDXgLmfsy9TRCBlKwO2LNBFzpzvb9iIj+jR+eSc6DLYYvVOdivT/jm7MtU6TebYuRmzEOI7w40UA==}
+    engines: {node: '>=10.0.0'}
 
   bluebird@3.7.2:
     resolution: {integrity: sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==}
@@ -425,7 +425,7 @@ snapshots:
     dependencies:
       '@types/node': 25.6.0
 
-  '@xmldom/xmldom@0.9.10': {}
+  '@xmldom/xmldom@0.8.15': {}
 
   bluebird@3.7.2: {}
 

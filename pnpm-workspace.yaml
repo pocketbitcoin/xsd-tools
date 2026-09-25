@@ -1,9 +1,12 @@
 packages:
-- 'example'
-- 'packages/*'
+  - 'example'
+  - 'packages/*'
+
+allowBuilds:
+  esbuild: true
 
 catalog:
   "@types/node": "^25.6"
-  "@xmldom/xmldom": "^0.9"
+  "@xmldom/xmldom": "^0.8.15"
   tsx: "^4"
   typescript: "^6"

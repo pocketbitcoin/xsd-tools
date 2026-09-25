@@ -1,4 +1,3 @@
-import type { Element } from '@xmldom/xmldom';
 import type { XsSchema, XsSimpleType } from '../schema/index.js';
 import { ValidationError } from './error.js';
 

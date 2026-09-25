@@ -1,6 +1,5 @@
 import { ValidationError } from './error.js';
 import type { XsSchema, XsAttribute } from '../schema/index.js';
-import type { Element } from '@xmldom/xmldom';
 
 export function parseWithXsAttribute(element: Element, xsAttribute: XsAttribute, xsSchema: XsSchema) {
   const value = element.getAttribute(xsAttribute['@name']) || xsAttribute['@default'] || null;
