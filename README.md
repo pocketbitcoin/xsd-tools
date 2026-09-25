@@ -10,7 +10,7 @@
 
 ```sh
 # install the generator and dependencies
-pnpm add xsd-tools @xmldom/xmldom@^0.9
+pnpm add xsd-tools @xmldom/xmldom@^0.8.15
 pnpm add -D @xsd-tools/typescript
 ```
 

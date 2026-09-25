@@ -2,7 +2,6 @@ import { parseWithXsElement } from './element.js';
 import { ValidationError } from './error.js';
 import { camelCase } from './utils.js';
 import type { XsSchema } from '../schema/index.js';
-import type { Element } from '@xmldom/xmldom';
 
 export function parseWithXsSchema(element: Element, xsSchema: XsSchema) {
   const errors = [] as ValidationError[];

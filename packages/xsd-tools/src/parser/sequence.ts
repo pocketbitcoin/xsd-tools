@@ -1,4 +1,3 @@
-import type { Element } from '@xmldom/xmldom';
 import type { XsSchema, XsSequence } from '../schema/index.js';
 import { parseWithXsElement } from './element.js';
 import { ValidationError } from './error.js';
