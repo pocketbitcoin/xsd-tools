@@ -34,6 +34,23 @@ const { greeting } = parse(dom);
 console.log(`${greeting['@from']}: ${greeting['#']}`);
 ```
 
+## Build
+
+From the repository root, using the pnpm version in `packageManager`:
+
+```sh
+pnpm install
+pnpm build
+```
+
+`pnpm build` compiles `xsd-tools` and `@xsd-tools/typescript` with `tsc`. Each package writes its output to `dist/`.
+
+Publish with pnpm as well. `pnpm publish` rewrites `catalog:` and `workspace:` specifiers to real versions. `npm publish` leaves those protocols in the tarball, and installs then fail.
+
+```sh
+pnpm publish-all
+```
+
 ## License
 
 MIT
