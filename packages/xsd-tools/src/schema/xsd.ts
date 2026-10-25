@@ -1,6 +1,8 @@
 import type { XsSchema } from './index.js';
 
 export const schema: XsSchema = {
+  '@targetNamespace': 'http://www.w3.org/2001/XMLSchema',
+  '@elementFormDefault': 'qualified',
   xsElement: [{
     '@name': 'xs:schema',
     '@type': 'xs:schema',

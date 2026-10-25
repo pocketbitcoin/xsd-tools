@@ -1,5 +1,6 @@
 import ts from 'typescript';
 import type { XsSimpleContent } from 'xsd-tools';
+import { generateFromAttributes } from './attribute.js';
 
 export function generateFromSimpleContent(xsSimpleContent: XsSimpleContent) {
   const { xsExtension } = xsSimpleContent;
@@ -18,19 +19,7 @@ export function generateFromSimpleContent(xsSimpleContent: XsSimpleContent) {
     )
   );
 
-  for (const xsAttribute of xsExtension.xsAttribute) {
-    properties.push(
-      ts.factory.createPropertySignature(
-        undefined,
-        ts.factory.createStringLiteral(`@${xsAttribute['@name']}`),
-        xsAttribute['@use'] !== 'required' && !xsAttribute['@default'] ? ts.factory.createToken(ts.SyntaxKind.QuestionToken) : undefined,
-        ts.factory.createTypeReferenceNode(
-          ts.factory.createIdentifier(xsAttribute['@type']),
-          undefined
-        )
-      )
-    );
-  }
+  properties.push(...generateFromAttributes(xsExtension.xsAttribute));
 
   return ts.factory.createTypeLiteralNode(properties);
 }

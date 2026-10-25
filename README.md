@@ -23,7 +23,7 @@ pnpm xsd-ts example/greeting.xsd example/greeting.ts
 // feed xml dom into parser to get the typed valid object structure
 import { readFileSync } from 'fs';
 import { DOMParser } from '@xmldom/xmldom';
-import parse from './greeting.ts';
+import { parse } from './greeting.ts';
 
 const xml = readFileSync('example/greeting.xml', 'utf8');
 
@@ -33,6 +33,24 @@ const { greeting } = parse(dom);
 
 console.log(`${greeting['@from']}: ${greeting['#']}`);
 ```
+
+```ts
+// turn a typed object back into an xml dom, using the same generated file
+import { DOMImplementation, XMLSerializer } from '@xmldom/xmldom';
+import { serialize } from './greeting.ts';
+
+const doc = serialize({
+  greeting: {
+    '#': 'Hello back!',
+    '@from': 'example',
+  },
+}, new DOMImplementation());
+
+console.log(new XMLSerializer().serializeToString(doc));
+// <?xml version="1.0" encoding="UTF-8"?><greeting from="example" xmlns="example">Hello back!</greeting>
+```
+
+`serialize` writes elements in schema order and throws a `SerializationError` when a required element or attribute is missing. It works with any DOM implementation, for example `document.implementation` in a browser.
 
 ## Build
 

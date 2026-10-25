@@ -12,6 +12,12 @@ import { ValidationError } from './error.js';
 // export type { Document as XMLDomDocument } from '@xmldom/xmldom';
 export type XMLDomDocument = typeof globalThis.document;
 
+// Generated serializers take this instead of DOMImplementation, for the same
+// reason. Consumers pass new DOMImplementation() from @xmldom/xmldom, or
+// document.implementation in a browser. When upgrading to 0.9, replace with:
+// export type { DOMImplementation as XMLDomImplementation } from '@xmldom/xmldom';
+export type XMLDomImplementation = typeof globalThis.document.implementation;
+
 export function parse(document: XMLDomDocument, schema?: XsSchema) {
   const effectiveSchema = schema || xsdSchema;
 
