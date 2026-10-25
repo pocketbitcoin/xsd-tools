@@ -79,9 +79,15 @@ importers:
 
   packages/xsd-tools:
     devDependencies:
+      '@types/node':
+        specifier: 'catalog:'
+        version: 25.6.0
       '@xmldom/xmldom':
         specifier: 'catalog:'
         version: 0.8.15
+      tsx:
+        specifier: 'catalog:'
+        version: 4.21.0
       typescript:
         specifier: 'catalog:'
         version: 6.0.3

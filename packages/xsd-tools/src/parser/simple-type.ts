@@ -41,7 +41,9 @@ export function parseWithXsSimpleType(element: Element, xsSimpleType: XsSimpleTy
   if (xsRestriction['@base'] === 'xs:boolean') {
     if (!element.textContent) throw new ValidationError('was empty', element);
 
-    return Boolean(element.textContent.trim());
+    const value = element.textContent.trim();
+
+    return value === 'true' || value === '1';
   }
 
   throw new ValidationError('unknown restriction', element);

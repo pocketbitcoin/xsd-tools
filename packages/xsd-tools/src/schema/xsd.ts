@@ -27,7 +27,13 @@ export const schema: XsSchema = {
         '@maxOccurs': 'unbounded',
       }],
     },
-    xsAttribute: [],
+    xsAttribute: [{
+      '@name': 'targetNamespace',
+      '@type': 'xs:string',
+    }, {
+      '@name': 'elementFormDefault',
+      '@type': 'xs:string',
+    }],
     xsAttributeGroup: [],
   }, {
     '@name': 'xs:element',
@@ -132,6 +138,9 @@ export const schema: XsSchema = {
       '@use': 'required',
     }, {
       '@name': 'type',
+      '@type': 'xs:string',
+    }, {
+      '@name': 'use',
       '@type': 'xs:string',
     }, {
       '@name': 'default',

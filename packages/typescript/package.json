@@ -40,7 +40,6 @@
     "xsd-ts": "tsx src/bin/xsd-ts.ts",
     "build": "tsc",
     "prepublish": "npm run build",
-    "test": "echo \"Error: run tests from root\" && exit 1",
     "check-types": "tsc --noEmit"
   },
   "bugs": {

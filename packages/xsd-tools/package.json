@@ -35,7 +35,7 @@
     "dev": "tsc --watch",
     "build": "tsc",
     "prepublish": "npm run build",
-    "test": "echo \"Error: run tests from root\" && exit 1",
+    "test": "node --import tsx --test test/*.test.ts",
     "check-types": "tsc --noEmit"
   },
   "bugs": {
@@ -45,7 +45,9 @@
     "@xmldom/xmldom": "catalog:"
   },
   "devDependencies": {
+    "@types/node": "catalog:",
     "@xmldom/xmldom": "catalog:",
+    "tsx": "catalog:",
     "typescript": "catalog:"
   }
 }

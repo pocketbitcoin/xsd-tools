@@ -45,6 +45,8 @@ pnpm build
 
 `pnpm build` compiles `xsd-tools` and `@xsd-tools/typescript` with `tsc`. Each package writes its output to `dist/`.
 
+Run the tests with `pnpm test`.
+
 Publish with pnpm as well. `pnpm publish` rewrites `catalog:` and `workspace:` specifiers to real versions. `npm publish` leaves those protocols in the tarball, and installs then fail.
 
 ```sh
