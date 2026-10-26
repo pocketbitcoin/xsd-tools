@@ -1,5 +1,6 @@
 import ts from 'typescript';
 import type { XsComplexType } from 'xsd-tools';
+import { generateFromAttributes } from './attribute.js';
 import { generateFromChoice } from './choice.js';
 import { generateFromSequence } from './sequence.js';
 import { generateFromSimpleContent } from './simple-content.js';
@@ -15,6 +16,13 @@ export function generateFromComplexType(xsComplexType: XsComplexType) {
     typeNode = generateFromSimpleContent(xsComplexType.xsSimpleContent);
   } else {
     throw new Error(`unable to generate from "${JSON.stringify(xsComplexType)}"`);
+  }
+
+  if ('xsAttribute' in xsComplexType && xsComplexType.xsAttribute.length > 0) {
+    typeNode = ts.factory.createIntersectionTypeNode([
+      typeNode,
+      ts.factory.createTypeLiteralNode(generateFromAttributes(xsComplexType.xsAttribute)),
+    ]);
   }
 
   return ts.factory.createTypeAliasDeclaration(

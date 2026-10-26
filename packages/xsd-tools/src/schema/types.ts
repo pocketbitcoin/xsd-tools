@@ -109,6 +109,8 @@ export type XsSimpleType = {
 };
 
 export type XsSchema = {
+  '@targetNamespace'?: string,
+  '@elementFormDefault'?: 'qualified' | 'unqualified',
   xsElement: XsElement[],
   xsComplexType: XsComplexType[],
   xsSimpleType: XsSimpleType[],

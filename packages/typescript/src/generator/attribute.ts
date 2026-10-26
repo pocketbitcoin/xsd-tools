@@ -1,0 +1,14 @@
+import ts from 'typescript';
+import type { XsAttribute } from 'xsd-tools';
+
+export function generateFromAttributes(xsAttributes: XsAttribute[]) {
+  return xsAttributes.map((xsAttribute) => ts.factory.createPropertySignature(
+    undefined,
+    ts.factory.createStringLiteral(`@${xsAttribute['@name']}`),
+    xsAttribute['@use'] !== 'required' && !xsAttribute['@default'] ? ts.factory.createToken(ts.SyntaxKind.QuestionToken) : undefined,
+    ts.factory.createTypeReferenceNode(
+      ts.factory.createIdentifier(xsAttribute['@type']),
+      undefined
+    )
+  ));
+}

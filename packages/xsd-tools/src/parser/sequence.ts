@@ -42,14 +42,14 @@ export function parseWithXsSequence(element: Element, xsSequence: XsSequence, xs
         continue;
       }
 
-      if (result[camelCase(element.tagName)]) {
+      if (result[camelCase(element.tagName)] !== undefined) {
         throw new ValidationError('cannot occur multiple times', element);
       }
 
       result[camelCase(element.tagName)] = parseWithXsElement(element, xsElement, xsSchema);
     }
 
-    if (xsElement['@minOccurs'] !== 0 && !result[camelCase(xsElement['@name'])]) {
+    if (xsElement['@minOccurs'] !== 0 && result[camelCase(xsElement['@name'])] === undefined) {
       throw new ValidationError('was expected at least once', element);
     }
   }

@@ -37,13 +37,28 @@ export function generate(doc: XMLDomDocument) {
       ts.factory.createNamedImports([
         ts.factory.createImportSpecifier(
           false,
-          undefined,
-          ts.factory.createIdentifier('parse')
+          ts.factory.createIdentifier('parse'),
+          ts.factory.createIdentifier('parseXml')
+        ),
+        ts.factory.createImportSpecifier(
+          false,
+          ts.factory.createIdentifier('serialize'),
+          ts.factory.createIdentifier('serializeXml')
         ),
         ts.factory.createImportSpecifier(
           true,
           undefined,
           ts.factory.createIdentifier('XMLDomDocument')
+        ),
+        ts.factory.createImportSpecifier(
+          true,
+          undefined,
+          ts.factory.createIdentifier('XMLDomImplementation')
+        ),
+        ts.factory.createImportSpecifier(
+          true,
+          undefined,
+          ts.factory.createIdentifier('XsSchema')
         ),
       ])
     ),
@@ -75,13 +90,28 @@ export function generate(doc: XMLDomDocument) {
         ...simpleTypes,
         ...complexTypes,
 
+        ts.factory.createVariableStatement(
+          undefined,
+          ts.factory.createVariableDeclarationList(
+            [
+              ts.factory.createVariableDeclaration(
+                ts.factory.createIdentifier('schema'),
+                undefined,
+                ts.factory.createTypeReferenceNode(
+                  ts.factory.createIdentifier('XsSchema'),
+                  undefined
+                ),
+                objectToAst(xsSchema)
+              ),
+            ],
+            ts.NodeFlags.Const
+          )
+        ),
+
         ts.factory.createFunctionDeclaration(
-          [
-            ts.factory.createModifier(ts.SyntaxKind.ExportKeyword),
-            ts.factory.createModifier(ts.SyntaxKind.DefaultKeyword),
-          ],
+          [ts.factory.createModifier(ts.SyntaxKind.ExportKeyword)],
           undefined,
-          undefined,
+          ts.factory.createIdentifier('parse'),
           undefined,
           [
             ts.factory.createParameterDeclaration(
@@ -102,17 +132,75 @@ export function generate(doc: XMLDomDocument) {
               ts.factory.createReturnStatement(
                 ts.factory.createAsExpression(
                   ts.factory.createCallExpression(
-                    ts.factory.createIdentifier('parse'),
+                    ts.factory.createIdentifier('parseXml'),
                     undefined,
                     [
                       ts.factory.createIdentifier('doc'),
-                      objectToAst(xsSchema),
+                      ts.factory.createIdentifier('schema'),
                     ]
                   ),
                   ts.factory.createTypeReferenceNode(
                     ts.factory.createIdentifier('_'),
                     undefined
                   )
+                )
+              ),
+            ],
+            true
+          )
+        ),
+
+        // kept for backwards compatibility with `import parse from`
+        ts.factory.createExportAssignment(
+          undefined,
+          false,
+          ts.factory.createIdentifier('parse')
+        ),
+
+        ts.factory.createFunctionDeclaration(
+          [ts.factory.createModifier(ts.SyntaxKind.ExportKeyword)],
+          undefined,
+          ts.factory.createIdentifier('serialize'),
+          undefined,
+          [
+            ts.factory.createParameterDeclaration(
+              undefined,
+              undefined,
+              ts.factory.createIdentifier('value'),
+              undefined,
+              ts.factory.createTypeReferenceNode(
+                ts.factory.createIdentifier('_'),
+                undefined
+              ),
+              undefined
+            ),
+            ts.factory.createParameterDeclaration(
+              undefined,
+              undefined,
+              ts.factory.createIdentifier('implementation'),
+              undefined,
+              ts.factory.createTypeReferenceNode(
+                ts.factory.createIdentifier('XMLDomImplementation'),
+                undefined
+              ),
+              undefined
+            ),
+          ],
+          ts.factory.createTypeReferenceNode(
+            ts.factory.createIdentifier('XMLDomDocument'),
+            undefined
+          ),
+          ts.factory.createBlock(
+            [
+              ts.factory.createReturnStatement(
+                ts.factory.createCallExpression(
+                  ts.factory.createIdentifier('serializeXml'),
+                  undefined,
+                  [
+                    ts.factory.createIdentifier('value'),
+                    ts.factory.createIdentifier('schema'),
+                    ts.factory.createIdentifier('implementation'),
+                  ]
                 )
               ),
             ],

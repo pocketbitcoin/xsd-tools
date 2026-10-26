@@ -11,7 +11,7 @@ export function parseWithXsSimpleContent(element: Element, xsSimpleContent: XsSi
   for (const xsAttribute of xsSimpleContent.xsExtension.xsAttribute) {
     const value = parseWithXsAttribute(element, xsAttribute, xsSchema);
 
-    if (value !== null) {
+    if (value !== undefined) {
       result[camelCase(`@${xsAttribute['@name']}`)] = value;
     }
   }
