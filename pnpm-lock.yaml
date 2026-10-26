@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     '@types/node':
-      specifier: ^25.6
-      version: 25.6.0
+      specifier: ^26.6
+      version: 26.6.5
     '@xmldom/xmldom':
       specifier: ^0.8.15
       version: 0.8.15
@@ -38,7 +38,7 @@ importers:
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
-        version: 25.6.0
+        version: 26.6.5
       '@xsd-tools/typescript':
         specifier: workspace:*
         version: link:../packages/typescript
@@ -63,7 +63,7 @@ importers:
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
-        version: 25.6.0
+        version: 26.6.5
       '@types/unzipper':
         specifier: ^0.10
         version: 0.10.11
@@ -81,7 +81,7 @@ importers:
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
-        version: 25.6.0
+        version: 26.6.5
       '@xmldom/xmldom':
         specifier: 'catalog:'
         version: 0.8.15
@@ -250,8 +250,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@types/node@25.6.0':
-    resolution: {integrity: sha512-+qIYRKdNYJwY3vRCZMdJbPLJAtGjQBudzZzdzwQYkEPQd+PJGixUL5QfvCLDaULoLv+RhT3LDkwEfKaAkgSmNQ==}
+  '@types/node@26.6.5':
+    resolution: {integrity: sha512-uMzsv9stDdofIZBx4UGh4Z9ZgXnGC9seRDscilBcTHAeOFk67MZg/k9bWVfO+bk4qZmG+l52hRnLwUiH2LnJTg==}
 
   '@types/unzipper@0.10.11':
     resolution: {integrity: sha512-D25im2zjyMCcgL9ag6N46+wbtJBnXIr7SI4zHf9eJD2Dw2tEB5e+p5MYkrxKIVRscs5QV0EhtU9rgXSPx90oJg==}
@@ -330,8 +330,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  undici-types@7.19.2:
-    resolution: {integrity: sha512-qYVnV5OEm2AW8cJMCpdV20CDyaN3g0AjDlOGf1OW4iaDEx8MwdtChUp4zu4H0VP3nDRF/8RKWH+IPp9uW0YGZg==}
+  undici-types@8.9.0:
+    resolution: {integrity: sha512-KTDyRTYX8sWmKXAikPHHSyc63CRPETMctyjKFupcC6OBLXT3xsN0e9aF7m+mIXutFWpUXuedtowG7iLOzp0kQg==}
 
   universalify@2.0.1:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
@@ -423,13 +423,13 @@ snapshots:
   '@esbuild/win32-x64@0.27.7':
     optional: true
 
-  '@types/node@25.6.0':
+  '@types/node@26.6.5':
     dependencies:
-      undici-types: 7.19.2
+      undici-types: 8.9.0
 
   '@types/unzipper@0.10.11':
     dependencies:
-      '@types/node': 25.6.0
+      '@types/node': 26.6.5
 
   '@xmldom/xmldom@0.8.15': {}
 
@@ -528,7 +528,7 @@ snapshots:
 
   typescript@6.0.3: {}
 
-  undici-types@7.19.2: {}
+  undici-types@8.9.0: {}
 
   universalify@2.0.1: {}
 
