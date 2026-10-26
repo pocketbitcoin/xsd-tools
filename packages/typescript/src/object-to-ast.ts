@@ -1,4 +1,4 @@
-import ts from 'typescript';
+import ts from '@typescript/typescript6';
 
 export function objectToAst(obj: any): ts.Expression {
   if (obj === null) {

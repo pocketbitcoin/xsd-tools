@@ -1,4 +1,4 @@
-import ts from 'typescript';
+import ts from '@typescript/typescript6';
 import type { XsChoice } from 'xsd-tools';
 import { generateFromSequence } from './sequence.js';
 import { generateFromType } from './type.js';

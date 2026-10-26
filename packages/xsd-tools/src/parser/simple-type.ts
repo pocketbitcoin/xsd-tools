@@ -1,7 +1,8 @@
 import { resolveRestriction, resolveType, type BuiltinKind, type XsSchema, type XsSimpleType } from '../schema/index.js';
+import type { XMLDomElement } from '../dom.js';
 import { ValidationError } from './error.js';
 
-export function parseWithXsSimpleType(element: Element, xsSimpleType: XsSimpleType, xsSchema: XsSchema) {
+export function parseWithXsSimpleType(element: XMLDomElement, xsSimpleType: XsSimpleType, xsSchema: XsSchema) {
   if (!element) {
     throw new ValidationError('element required', element);
   }
@@ -12,7 +13,7 @@ export function parseWithXsSimpleType(element: Element, xsSimpleType: XsSimpleTy
 }
 
 // for named simple types as well as built-in types such as xs:string
-export function parseWithType(element: Element, type: string, xsSchema: XsSchema) {
+export function parseWithType(element: XMLDomElement, type: string, xsSchema: XsSchema) {
   if (!element.textContent) throw new ValidationError('was empty', element);
 
   return parseText(element.textContent, resolveType(type, xsSchema).kind);

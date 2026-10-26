@@ -23,6 +23,6 @@ export function parse(doc: XMLDomDocument) {
     return parseXml(doc, schema) as _;
 }
 export default parse;
-export function serialize(value: _, implementation: XMLDomImplementation): XMLDomDocument {
+export function serialize<TDocument extends XMLDomDocument>(value: _, implementation: XMLDomImplementation<TDocument>): TDocument {
     return serializeXml(value, schema, implementation);
 }

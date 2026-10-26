@@ -1,4 +1,4 @@
-import ts, { type TypeNode } from 'typescript';
+import ts, { type TypeNode } from '@typescript/typescript6';
 import type { XsSimpleType } from 'xsd-tools';
 import { generateFromType } from './type.js';
 

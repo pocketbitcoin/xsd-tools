@@ -1,8 +1,9 @@
 import type { XsElement, XsSchema } from '../schema/index.js';
+import type { XMLDomElement } from '../dom.js';
 import { parseWithXsComplexType } from './complex-type.js';
 import { parseWithType, parseWithXsSimpleType } from './simple-type.js';
 
-export function parseWithXsElement(element: Element, xsElement: XsElement, xsSchema: XsSchema) {
+export function parseWithXsElement(element: XMLDomElement, xsElement: XsElement, xsSchema: XsSchema) {
   const xsComplexType = xsSchema.xsComplexType.find((t) => t['@name'] === xsElement['@type']);
 
   if (xsComplexType) {

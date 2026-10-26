@@ -1,4 +1,4 @@
-import ts from 'typescript';
+import ts from '@typescript/typescript6';
 import type { XsSimpleContent } from 'xsd-tools';
 import { generateFromAttributes } from './attribute.js';
 import { generateFromType } from './type.js';

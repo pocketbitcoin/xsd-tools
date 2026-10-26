@@ -1,10 +1,11 @@
 import type { XsElement } from '../schema/index.js';
+import type { XMLDomElement } from '../dom.js';
 import { serializeWithXsComplexType } from './complex-type.js';
 import type { SerializationContext } from './context.js';
 import { formatWithType } from './format.js';
 import { serializeWithXsSimpleType } from './simple-type.js';
 
-export function serializeWithXsElement(element: Element, value: unknown, xsElement: XsElement, context: SerializationContext, path: string) {
+export function serializeWithXsElement(element: XMLDomElement, value: unknown, xsElement: XsElement, context: SerializationContext, path: string) {
   const xsComplexType = context.xsSchema.xsComplexType.find((t) => t['@name'] === xsElement['@type']);
 
   if (xsComplexType) {

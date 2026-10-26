@@ -1,8 +1,10 @@
+import type { XMLDomElement } from '../dom.js';
+
 export class ValidationError extends Error {
-  element: Element;
+  element: XMLDomElement;
   errors: ValidationError[];
 
-  constructor(message: string, element: Element, errors: ValidationError[] = []) {
+  constructor(message: string, element: XMLDomElement, errors: ValidationError[] = []) {
     super(`${message} at element ${element} ${errors.map((e) => e.message)}`);
 
     Object.setPrototypeOf(this, ValidationError.prototype);

@@ -9,7 +9,6 @@
       "types": "./dist/index.d.ts"
     }
   },
-
   "description": "Essentials for schema-driven, type-safe XML processing",
   "keywords": [
     "xsd",
@@ -40,9 +39,6 @@
   },
   "bugs": {
     "url": "https://github.com/pocketbitcoin/xsd-tools/issues"
-  },
-  "peerDependencies": {
-    "@xmldom/xmldom": "catalog:"
   },
   "devDependencies": {
     "@types/node": "catalog:",

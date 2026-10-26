@@ -29,5 +29,5 @@
   "devDependencies": {
     "typescript": "catalog:"
   },
-  "packageManager": "pnpm@11.24.0"
+  "packageManager": "pnpm@12.12.1"
 }

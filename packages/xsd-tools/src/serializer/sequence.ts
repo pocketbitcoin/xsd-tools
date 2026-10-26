@@ -1,10 +1,11 @@
 import type { XsSequence } from '../schema/index.js';
+import type { XMLDomElement } from '../dom.js';
 import { appendElement, type SerializationContext } from './context.js';
 import { serializeWithXsElement } from './element.js';
 import { SerializationError } from './error.js';
 import { camelCase } from '../parser/utils.js';
 
-export function serializeWithXsSequence(element: Element, value: any, xsSequence: XsSequence, context: SerializationContext, path: string) {
+export function serializeWithXsSequence(element: XMLDomElement, value: any, xsSequence: XsSequence, context: SerializationContext, path: string) {
   // elements are written in schema order, not in object key order
   for (const xsElement of xsSequence.xsElement) {
     const key = camelCase(xsElement['@name']);

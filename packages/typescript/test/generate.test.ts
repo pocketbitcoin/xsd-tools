@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { test } from 'node:test';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import ts from 'typescript';
 import { DOMImplementation, DOMParser } from '@xmldom/xmldom';
 import { generate } from '../src/generate.js';
 
@@ -38,24 +38,25 @@ export const report: Report = {
 export const wrong: Report = { ...report, '@signed': 'true' };
 `);
 
+// type-checked with the tsc consumers use, typescript 7, under strict settings
 test('generates valid typescript for built-in and derived types', () => {
-  const program = ts.createProgram([generatedFile, usageFile], {
-    module: ts.ModuleKind.NodeNext,
-    moduleResolution: ts.ModuleResolutionKind.NodeNext,
-    target: ts.ScriptTarget.ESNext,
-    lib: ['lib.esnext.d.ts'],
-    types: [],
-    strict: true,
-    exactOptionalPropertyTypes: true,
-    noUncheckedIndexedAccess: true,
-    verbatimModuleSyntax: true,
-    skipLibCheck: true,
-    noEmit: true,
-  });
+  const tsc = fileURLToPath(new URL('../node_modules/.bin/tsc', import.meta.url));
+  const { status, stdout } = spawnSync(tsc, [
+    '--ignoreConfig',
+    '--noEmit',
+    '--module', 'nodenext',
+    '--target', 'esnext',
+    '--lib', 'esnext',
+    '--strict',
+    '--exactOptionalPropertyTypes',
+    '--noUncheckedIndexedAccess',
+    '--verbatimModuleSyntax',
+    '--skipLibCheck',
+    generatedFile,
+    usageFile,
+  ], { cwd: outDir, encoding: 'utf8' });
 
-  const diagnostics = ts.getPreEmitDiagnostics(program).map((d) => ts.flattenDiagnosticMessageText(d.messageText, '\n'));
-
-  assert.deepEqual(diagnostics, []);
+  assert.equal(status, 0, stdout);
 });
 
 test('generated parse and serialize round-trip a document', async () => {

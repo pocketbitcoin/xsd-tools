@@ -1,4 +1,4 @@
-import ts from 'typescript';
+import ts from '@typescript/typescript6';
 import { builtinKind } from 'xsd-tools';
 
 // built-in xs:* types map to the javascript value the parser returns,

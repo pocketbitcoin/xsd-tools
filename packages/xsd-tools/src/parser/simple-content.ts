@@ -1,9 +1,10 @@
 import { parseWithType } from './simple-type.js';
+import type { XMLDomElement } from '../dom.js';
 import type { XsSchema, XsSimpleContent } from '../schema/index.js';
 import { camelCase } from './utils.js';
 import { parseWithXsAttribute } from './attribute.js';
 
-export function parseWithXsSimpleContent(element: Element, xsSimpleContent: XsSimpleContent, xsSchema: XsSchema) {
+export function parseWithXsSimpleContent(element: XMLDomElement, xsSimpleContent: XsSimpleContent, xsSchema: XsSchema) {
   const { xsExtension } = xsSimpleContent;
 
   const result = {} as any;

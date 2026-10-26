@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
-import { DOMImplementation, DOMParser, XMLSerializer } from '@xmldom/xmldom';
+import { DOMImplementation, DOMParser, XMLSerializer, type Node } from '@xmldom/xmldom';
 import { parse, serialize, SerializationError, xsdSchema } from '../src/index.js';
 import { schema } from './invoice-schema.js';
 
@@ -21,7 +21,7 @@ const invoice = {
 };
 
 const implementation = new DOMImplementation();
-const toString = (doc: Document) => new XMLSerializer().serializeToString(doc);
+const toString = (doc: Node) => new XMLSerializer().serializeToString(doc);
 const fromString = (xml: string) => new DOMParser().parseFromString(xml, 'text/xml');
 
 test('writes elements in schema order with formatted values', () => {

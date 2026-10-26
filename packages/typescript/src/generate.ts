@@ -1,4 +1,4 @@
-import ts from 'typescript';
+import ts from '@typescript/typescript6';
 import { parse, type XMLDomDocument, type XsSchema } from 'xsd-tools';
 import { generateFromChoice } from './generator/choice.js';
 import { generateFromComplexType } from './generator/complex-type.js';
@@ -161,7 +161,18 @@ export function generate(doc: XMLDomDocument) {
           [ts.factory.createModifier(ts.SyntaxKind.ExportKeyword)],
           undefined,
           ts.factory.createIdentifier('serialize'),
-          undefined,
+          // generic, so callers get back their own DOM's document type
+          [
+            ts.factory.createTypeParameterDeclaration(
+              undefined,
+              ts.factory.createIdentifier('TDocument'),
+              ts.factory.createTypeReferenceNode(
+                ts.factory.createIdentifier('XMLDomDocument'),
+                undefined
+              ),
+              undefined
+            ),
+          ],
           [
             ts.factory.createParameterDeclaration(
               undefined,
@@ -181,13 +192,18 @@ export function generate(doc: XMLDomDocument) {
               undefined,
               ts.factory.createTypeReferenceNode(
                 ts.factory.createIdentifier('XMLDomImplementation'),
-                undefined
+                [
+                  ts.factory.createTypeReferenceNode(
+                    ts.factory.createIdentifier('TDocument'),
+                    undefined
+                  ),
+                ]
               ),
               undefined
             ),
           ],
           ts.factory.createTypeReferenceNode(
-            ts.factory.createIdentifier('XMLDomDocument'),
+            ts.factory.createIdentifier('TDocument'),
             undefined
           ),
           ts.factory.createBlock(

@@ -1,8 +1,9 @@
 import { ValidationError } from './error.js';
+import type { XMLDomElement } from '../dom.js';
 import { resolveType, type XsSchema, type XsAttribute } from '../schema/index.js';
 import { parseText } from './simple-type.js';
 
-export function parseWithXsAttribute(element: Element, xsAttribute: XsAttribute, xsSchema: XsSchema) {
+export function parseWithXsAttribute(element: XMLDomElement, xsAttribute: XsAttribute, xsSchema: XsSchema) {
   const value = element.getAttribute(xsAttribute['@name']) || xsAttribute['@default'] || null;
 
   if (xsAttribute['@use'] === 'required' && value === null) {
