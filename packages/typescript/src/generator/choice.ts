@@ -1,6 +1,7 @@
 import ts from 'typescript';
 import type { XsChoice } from 'xsd-tools';
 import { generateFromSequence } from './sequence.js';
+import { generateFromType } from './type.js';
 
 export function generateFromChoice(xsChoice: XsChoice) {
   if ('xsElement' in xsChoice) {
@@ -8,10 +9,7 @@ export function generateFromChoice(xsChoice: XsChoice) {
       undefined,
       ts.factory.createIdentifier(e['@name']),
       undefined,
-      ts.factory.createTypeReferenceNode(
-        ts.factory.createIdentifier(e['@type']),
-        undefined
-      )
+      generateFromType(e['@type'])
     )])))
   }
 

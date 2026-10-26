@@ -22,7 +22,5 @@ export function serializeWithXsElement(element: Element, value: unknown, xsEleme
   }
 
   // built-in types such as xs:string
-  if (value !== null) {
-    element.appendChild(context.document.createTextNode(formatWithType(value, xsElement['@type'], context.xsSchema, path)));
-  }
+  element.appendChild(context.document.createTextNode(formatWithType(value, xsElement['@type'], context.xsSchema, path)));
 }

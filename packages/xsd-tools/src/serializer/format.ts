@@ -1,25 +1,21 @@
-import type { XsRestriction, XsSchema } from '../schema/index.js';
+import { resolveRestriction, resolveType, type ResolvedType, type XsRestriction, type XsSchema } from '../schema/index.js';
 import { SerializationError } from './error.js';
 
-// inverse of the conversions in parser/simple-type.ts and parser/attribute.ts
+// inverse of parseText in parser/simple-type.ts
 export function formatWithType(value: unknown, type: string, xsSchema: XsSchema, path: string): string {
-  const xsSimpleType = xsSchema.xsSimpleType.find((t) => t['@name'] === type);
-
-  if (xsSimpleType) {
-    return formatWithXsRestriction(value, xsSimpleType.xsRestriction, path);
-  }
-
-  return formatWithXsRestriction(value, { '@base': type }, path);
+  return formatValue(value, resolveType(type, xsSchema), path);
 }
 
-export function formatWithXsRestriction(value: unknown, xsRestriction: XsRestriction, path: string): string {
+export function formatWithXsRestriction(value: unknown, xsRestriction: XsRestriction, xsSchema: XsSchema, path: string): string {
+  return formatValue(value, resolveRestriction(xsRestriction, xsSchema), path);
+}
+
+function formatValue(value: unknown, { kind, fractionDigits }: ResolvedType, path: string): string {
   if (value === undefined || value === null) {
     throw new SerializationError('value required', path);
   }
 
-  const base = xsRestriction['@base'];
-
-  if (base === 'xs:integer' || base === 'xs:nonNegativeInteger') {
+  if (kind === 'integer') {
     if (typeof value !== 'number' || !Number.isInteger(value)) {
       throw new SerializationError(`expected integer, got ${String(value)}`, path);
     }
@@ -27,19 +23,19 @@ export function formatWithXsRestriction(value: unknown, xsRestriction: XsRestric
     return String(value);
   }
 
-  if (base === 'xs:decimal') {
+  if (kind === 'decimal') {
     if (typeof value !== 'number' || !Number.isFinite(value)) {
       throw new SerializationError(`expected decimal, got ${String(value)}`, path);
     }
 
-    if (xsRestriction.xsFractionDigits) {
-      return value.toFixed(xsRestriction.xsFractionDigits['@value']);
+    if (fractionDigits !== undefined) {
+      return value.toFixed(fractionDigits);
     }
 
     return String(value);
   }
 
-  if (base === 'xs:boolean') {
+  if (kind === 'boolean') {
     if (typeof value !== 'boolean') {
       throw new SerializationError(`expected boolean, got ${String(value)}`, path);
     }
@@ -47,12 +43,12 @@ export function formatWithXsRestriction(value: unknown, xsRestriction: XsRestric
     return value ? 'true' : 'false';
   }
 
-  if (base === 'xs:date') {
+  if (kind === 'date') {
     // parsed with new Date('YYYY-MM-DD'), which is UTC midnight
     return value instanceof Date ? value.toISOString().slice(0, 10) : String(value);
   }
 
-  if (base === 'xs:dateTime') {
+  if (kind === 'dateTime') {
     return value instanceof Date ? value.toISOString() : String(value);
   }
 

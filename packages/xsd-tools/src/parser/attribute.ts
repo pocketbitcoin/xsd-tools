@@ -1,5 +1,6 @@
 import { ValidationError } from './error.js';
-import type { XsSchema, XsAttribute } from '../schema/index.js';
+import { resolveType, type XsSchema, type XsAttribute } from '../schema/index.js';
+import { parseText } from './simple-type.js';
 
 export function parseWithXsAttribute(element: Element, xsAttribute: XsAttribute, xsSchema: XsSchema) {
   const value = element.getAttribute(xsAttribute['@name']) || xsAttribute['@default'] || null;
@@ -12,14 +13,6 @@ export function parseWithXsAttribute(element: Element, xsAttribute: XsAttribute,
     return undefined;
   }
 
-  if (xsAttribute['@type'] === 'xs:integer') {
-    return parseInt(value.trim(), 10);
-  }
-
-  if (xsAttribute['@type'] === 'xs:nonNegativeInteger') {
-    return parseInt(value.trim(), 10);
-  }
-
   if (xsAttribute['@type'] === 'xs:nonNegativeIntegerOrUnbounded') {
     if (value.trim() === 'unbounded') {
       return 'unbounded';
@@ -28,5 +21,5 @@ export function parseWithXsAttribute(element: Element, xsAttribute: XsAttribute,
     return parseInt(value.trim(), 10);
   }
 
-  return value.trim();
+  return parseText(value, resolveType(xsAttribute['@type'], xsSchema).kind);
 }

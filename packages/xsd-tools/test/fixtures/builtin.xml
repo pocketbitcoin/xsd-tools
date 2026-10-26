@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="urn:builtin" authenticate="yes" signed="true" amount="1.50" issued="2024-02-29" revision="3" price="9.90">
+  <title>Report</title>
+  <total>12.30</total>
+  <code>A1</code>
+  <tag>x</tag>
+  <tag>y</tag>
+  <note lang="en">hello</note>
+</report>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="urn:builtin" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn:builtin">
+  <xs:element name="report" type="Report"/>
+  <xs:complexType name="Report">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="total" type="Total"/>
+      <xs:element name="code" type="Code"/>
+      <xs:element name="tag" type="xs:token" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="note" type="Note"/>
+    </xs:sequence>
+    <xs:attribute name="authenticate" type="xs:string" use="required"/>
+    <xs:attribute name="signed" type="xs:boolean" use="required"/>
+    <xs:attribute name="amount" type="xs:decimal" use="required"/>
+    <xs:attribute name="issued" type="xs:date" use="required"/>
+    <xs:attribute name="revision" type="xs:positiveInteger" use="required"/>
+    <xs:attribute name="uri" type="xs:anyURI"/>
+    <xs:attribute name="price" type="Amount"/>
+  </xs:complexType>
+  <xs:complexType name="Note">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="lang" type="xs:language"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="Amount">
+    <xs:restriction base="xs:decimal">
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Total">
+    <xs:restriction base="Amount"/>
+  </xs:simpleType>
+  <xs:simpleType name="Code">
+    <xs:restriction base="xs:token"/>
+  </xs:simpleType>
+</xs:schema>

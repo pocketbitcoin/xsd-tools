@@ -1,6 +1,7 @@
 import ts from 'typescript';
 import type { XsSimpleContent } from 'xsd-tools';
 import { generateFromAttributes } from './attribute.js';
+import { generateFromType } from './type.js';
 
 export function generateFromSimpleContent(xsSimpleContent: XsSimpleContent) {
   const { xsExtension } = xsSimpleContent;
@@ -12,10 +13,7 @@ export function generateFromSimpleContent(xsSimpleContent: XsSimpleContent) {
       undefined,
       ts.factory.createStringLiteral('#'),
       undefined,
-      ts.factory.createTypeReferenceNode(
-        ts.factory.createIdentifier(xsExtension['@base']),
-        undefined
-      )
+      generateFromType(xsExtension['@base'])
     )
   );
 

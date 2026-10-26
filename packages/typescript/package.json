@@ -40,6 +40,7 @@
     "xsd-ts": "tsx src/bin/xsd-ts.ts",
     "build": "tsc",
     "prepublish": "npm run build",
+    "test": "node --import tsx --test test/*.test.ts",
     "check-types": "tsc --noEmit"
   },
   "bugs": {
