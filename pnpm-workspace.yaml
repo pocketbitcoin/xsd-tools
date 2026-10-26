@@ -7,6 +7,6 @@ allowBuilds:
 
 catalog:
   "@types/node": "^25.6"
-  "@xmldom/xmldom": "^0.8.15"
+  "@xmldom/xmldom": "^0.9.12"
   tsx: "^4"
   typescript: "^6"
