@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "@xmldom/xmldom": "catalog:",
-    "commander": "^14",
+    "commander": "^15",
     "unzipper": "^0.12"
   },
   "devDependencies": {
