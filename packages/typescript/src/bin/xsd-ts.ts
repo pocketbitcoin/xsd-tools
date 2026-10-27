@@ -1,26 +1,57 @@
 #!/usr/bin/env node
 
-import { writeFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
-import { Command } from 'commander';
+import { parseArgs } from 'util';
 import { DOMParser } from '@xmldom/xmldom';
 import { generate } from '../generate.js';
-import fetchFile from '../fetch.js';
 
-const program = new Command();
+const usage = `Usage: xsd-ts [generate] <schema> <output>
 
-program
-.version(process.env.npm_package_version!)
-.command('generate [schema] [output]', { isDefault: true })
-.description('generate parser from xml schema (xsd)')
-.action(async (schema, output) => {
-  const payload = await fetchFile(schema);
+Generate types, parser and serializer from a local xml schema (xsd).
 
-  const document = new DOMParser().parseFromString(payload, 'text/xml');
+Options:
+  -V, --version  output the version number
+  -h, --help     display help for command`;
 
-  const contents = generate(document);
+function parse() {
+  try {
+    return parseArgs({
+      allowPositionals: true,
+      options: {
+        version: { type: 'boolean', short: 'V' },
+        help: { type: 'boolean', short: 'h' },
+      },
+    });
+  } catch (error) {
+    console.error(`${(error as Error).message}\n\n${usage}`);
+    process.exit(1);
+  }
+}
 
-  writeFileSync(resolve(output), contents);
-});
+const { values, positionals } = parse();
 
-program.parse(process.argv);
+if (values.version) {
+  // npm_package_version is only set inside package scripts, and then belongs to the calling project
+  const { version } = JSON.parse(readFileSync(new URL('../../package.json', import.meta.url), 'utf8'));
+
+  console.log(version);
+  process.exit(0);
+}
+
+// `generate` is the only command, so it may be omitted
+const [schema, output, ...rest] = positionals[0] === 'generate' ? positionals.slice(1) : positionals;
+
+if (values.help) {
+  console.log(usage);
+  process.exit(0);
+}
+
+if (!schema || !output || rest.length > 0) {
+  console.error(usage);
+  process.exit(1);
+}
+
+const document = new DOMParser().parseFromString(readFileSync(schema, 'utf8'), 'text/xml');
+
+writeFileSync(resolve(output), generate(document));

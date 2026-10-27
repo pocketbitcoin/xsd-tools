@@ -10,12 +10,14 @@
 
 ```sh
 # install the generator and dependencies
-pnpm add xsd-tools @xmldom/xmldom@^0.8.15
+pnpm add xsd-tools @xmldom/xmldom
 pnpm add -D @xsd-tools/typescript
 ```
 
+`xsd-tools` itself has no dependencies. It works with any DOM implementation, such as `@xmldom/xmldom` 0.8 or 0.9 in Node or the browser's own DOM.
+
 ```sh
-# generate types and parser based on xml schema
+# generate types, parser and serializer from a local xml schema
 pnpm xsd-ts example/greeting.xsd example/greeting.ts
 ```
 
@@ -50,7 +52,7 @@ console.log(new XMLSerializer().serializeToString(doc));
 // <?xml version="1.0" encoding="UTF-8"?><greeting from="example" xmlns="example">Hello back!</greeting>
 ```
 
-`serialize` writes elements in schema order and throws a `SerializationError` when a required element or attribute is missing. It works with any DOM implementation, for example `document.implementation` in a browser.
+`serialize` writes elements in schema order and throws a `SerializationError` when a required element or attribute is missing. It returns a document of the DOM implementation you pass in, for example `document.implementation` in a browser.
 
 ## Build
 

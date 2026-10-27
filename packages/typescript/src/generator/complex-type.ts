@@ -1,4 +1,4 @@
-import ts from 'typescript';
+import ts from '@typescript/typescript6';
 import type { XsComplexType } from 'xsd-tools';
 import { generateFromAttributes } from './attribute.js';
 import { generateFromChoice } from './choice.js';

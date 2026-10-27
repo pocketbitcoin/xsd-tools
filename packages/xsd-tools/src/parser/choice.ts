@@ -1,8 +1,9 @@
 import type { XsSchema, XsChoice } from '../schema/index.js';
+import type { XMLDomElement } from '../dom.js';
 import { ValidationError } from './error.js';
 import { parseWithXsSequence } from './sequence.js';
 
-export function parseWithXsChoice(element: Element, xsChoice: XsChoice, xsSchema: XsSchema) {
+export function parseWithXsChoice(element: XMLDomElement, xsChoice: XsChoice, xsSchema: XsSchema) {
   if ('xsElement' in xsChoice) {
     const errors = [] as ValidationError[];
 

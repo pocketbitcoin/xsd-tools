@@ -1,9 +1,10 @@
 import type { XsSimpleContent } from '../schema/index.js';
+import type { XMLDomElement } from '../dom.js';
 import { serializeWithXsAttribute } from './attribute.js';
 import type { SerializationContext } from './context.js';
 import { formatWithType } from './format.js';
 
-export function serializeWithXsSimpleContent(element: Element, value: any, xsSimpleContent: XsSimpleContent, context: SerializationContext, path: string) {
+export function serializeWithXsSimpleContent(element: XMLDomElement, value: any, xsSimpleContent: XsSimpleContent, context: SerializationContext, path: string) {
   const { xsExtension } = xsSimpleContent;
 
   for (const xsAttribute of xsExtension.xsAttribute) {

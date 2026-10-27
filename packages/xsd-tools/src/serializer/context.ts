@@ -1,4 +1,4 @@
-import type { XMLDomDocument } from '../parser/index.js';
+import type { XMLDomDocument, XMLDomElement } from '../dom.js';
 import type { XsSchema } from '../schema/index.js';
 
 export type SerializationContext = {
@@ -8,7 +8,7 @@ export type SerializationContext = {
   namespace: string | null,
 };
 
-export function appendElement(parent: Element, name: string, namespace: string | null, context: SerializationContext) {
+export function appendElement(parent: XMLDomElement, name: string, namespace: string | null, context: SerializationContext) {
   const element = context.document.createElementNS(namespace, name);
 
   // xmldom does not undeclare the parent's default namespace by itself

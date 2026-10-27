@@ -1,4 +1,5 @@
 import type { XsComplexType } from '../schema/index.js';
+import type { XMLDomElement } from '../dom.js';
 import { serializeWithXsAttribute } from './attribute.js';
 import { serializeWithXsChoice } from './choice.js';
 import type { SerializationContext } from './context.js';
@@ -6,7 +7,7 @@ import { SerializationError } from './error.js';
 import { serializeWithXsSequence } from './sequence.js';
 import { serializeWithXsSimpleContent } from './simple-content.js';
 
-export function serializeWithXsComplexType(element: Element, value: any, xsComplexType: XsComplexType, context: SerializationContext, path: string) {
+export function serializeWithXsComplexType(element: XMLDomElement, value: any, xsComplexType: XsComplexType, context: SerializationContext, path: string) {
   if (typeof value !== 'object' || value === null) {
     throw new SerializationError('expected an object', path);
   }

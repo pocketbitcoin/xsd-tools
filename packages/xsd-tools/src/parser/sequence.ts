@@ -1,9 +1,10 @@
 import type { XsSchema, XsSequence } from '../schema/index.js';
+import { ELEMENT_NODE, type XMLDomElement } from '../dom.js';
 import { parseWithXsElement } from './element.js';
 import { ValidationError } from './error.js';
 import { camelCase } from './utils.js';
 
-export function parseWithXsSequence(element: Element, xsSequence: XsSequence, xsSchema: XsSchema) {
+export function parseWithXsSequence(element: XMLDomElement, xsSequence: XsSequence, xsSchema: XsSchema) {
   const result = {} as any;
 
   for (const xsElement of xsSequence.xsElement) {
@@ -11,11 +12,11 @@ export function parseWithXsSequence(element: Element, xsSequence: XsSequence, xs
       const list = [];
 
       for (let node = element.firstChild; node !== null; node = node.nextSibling) {
-        if (node.nodeType !== node.ELEMENT_NODE) {
+        if (node.nodeType !== ELEMENT_NODE) {
           continue;
         }
 
-        const element = node as Element;
+        const element = node as XMLDomElement;
 
         if (xsElement['@name'] !== element.tagName) {
           continue;
@@ -32,11 +33,11 @@ export function parseWithXsSequence(element: Element, xsSequence: XsSequence, xs
     // result[camelCase(xsElement['@name'])] = null;
 
     for (let node = element.firstChild; node !== null; node = node.nextSibling) {
-      if (node.nodeType !== node.ELEMENT_NODE) {
+      if (node.nodeType !== ELEMENT_NODE) {
         continue;
       }
 
-      const element = node as Element;
+      const element = node as XMLDomElement;
 
       if (xsElement['@name'] !== element.tagName) {
         continue;

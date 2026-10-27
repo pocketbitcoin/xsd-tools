@@ -1,10 +1,11 @@
 import type { XsAttribute } from '../schema/index.js';
+import type { XMLDomElement } from '../dom.js';
 import type { SerializationContext } from './context.js';
 import { SerializationError } from './error.js';
 import { formatWithType } from './format.js';
 import { camelCase } from '../parser/utils.js';
 
-export function serializeWithXsAttribute(element: Element, value: any, xsAttribute: XsAttribute, context: SerializationContext, path: string) {
+export function serializeWithXsAttribute(element: XMLDomElement, value: any, xsAttribute: XsAttribute, context: SerializationContext, path: string) {
   const key = camelCase(`@${xsAttribute['@name']}`);
   const attributeValue = value[key];
 
