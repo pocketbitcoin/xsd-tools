@@ -9,6 +9,17 @@ import { generate } from '../generate.js';
 const usage = `Usage: xsd-ts [generate] <schema> <output>
 
 Generate types, parser and serializer from a local xml schema (xsd).
+// npm_package_version is only set inside package scripts, and then belongs to the calling project
+const { version } = JSON.parse(readFileSync(new URL('../../package.json', import.meta.url), 'utf8'));
+
+const program = new Command();
+
+program
+.version(version)
+.command('generate [schema] [output]', { isDefault: true })
+.description('generate parser from xml schema (xsd)')
+.action(async (schema, output) => {
+  const payload = await fetchFile(schema);
 
 Options:
   -V, --version  output the version number
