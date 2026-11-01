@@ -6,7 +6,7 @@ allowBuilds:
   esbuild: true
 
 catalog:
-  "@types/node": "^26.6.5"
+  "@types/node": "^26.6.6"
   "@typescript/typescript6": "^6.0.2"
   "@xmldom/xmldom": "^0.9.12"
   tsx: "^4.23.15"
