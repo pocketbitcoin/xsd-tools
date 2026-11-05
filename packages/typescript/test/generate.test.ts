@@ -27,15 +27,23 @@ export const report: Report = {
   code: 'A1',
   tag: ['x'],
   note: { '#': 'hello', '@lang': 'en' },
+  instructedAmount: { '#': 1234.5, '@currency': 'EUR' },
+  priority: 'NORM',
+  country: 'CH',
+  remittance: 'Invoice 2024-001',
   '@authenticate': 'yes',
   '@signed': true,
   '@amount': 1.5,
   '@issued': new Date('2024-02-29'),
   '@revision': 3,
+  '@chargeBearer': 'SLEV',
 };
 
 // @ts-expect-error xs:boolean attributes are booleans
 export const wrong: Report = { ...report, '@signed': 'true' };
+
+// @ts-expect-error enumerations only accept their values
+export const wrongPriority: Report = { ...report, priority: 'LOW' };
 `);
 
 // type-checked with the tsc consumers use, typescript 7, under strict settings

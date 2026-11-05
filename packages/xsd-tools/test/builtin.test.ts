@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import { DOMImplementation, DOMParser, XMLSerializer } from '@xmldom/xmldom';
-import { parse, serialize, SerializationError, type XsSchema } from '../src/index.js';
+import { parse, serialize, SerializationError, ValidationError, type XsSchema } from '../src/index.js';
 
 const fromString = (xml: string) => new DOMParser().parseFromString(xml, 'text/xml');
 const fixture = (name: string) => readFileSync(new URL(`./fixtures/${name}`, import.meta.url), 'utf8');
@@ -17,12 +17,18 @@ const report = {
     code: 'A1',
     tag: ['x', 'y'],
     note: { '#': 'hello', '@lang': 'en' },
+    instructedAmount: { '#': 1234.5, '@currency': 'EUR' },
+    priority: 'NORM',
+    country: 'CH',
+    remittance: 'Invoice 2024-001',
     '@authenticate': 'yes',
     '@signed': true,
     '@amount': 1.5,
     '@issued': new Date('2024-02-29'),
     '@revision': 3,
     '@price': 9.9,
+    '@chargeBearer': 'SLEV',
+    '@discount': 15,
   },
 };
 
@@ -38,13 +44,59 @@ test('formats built-in and derived types', () => {
   assert.match(xml, /price="9.90"/);
   assert.match(xml, /signed="true"/);
   assert.match(xml, /issued="2024-02-29"/);
+  assert.match(xml, /<instructedAmount currency="EUR">1234.50000<\/instructedAmount>/);
   assert.deepEqual(parse(fromString(xml), schema), report);
 });
 
-test('rejects values that do not match their built-in type', () => {
-  const withReport = (changes: object) => ({ report: { ...report.report, ...changes } });
+const withReport = (changes: object) => ({ report: { ...report.report, ...changes } });
+const withAmount = (amount: number) => withReport({ instructedAmount: { '#': amount, '@currency': 'EUR' } });
 
+test('rejects values that do not match their built-in type', () => {
   assert.throws(() => serialize(withReport({ '@signed': 'true' }), schema, implementation), SerializationError);
   assert.throws(() => serialize(withReport({ '@revision': 1.5 }), schema, implementation), SerializationError);
   assert.throws(() => serialize(withReport({ title: null }), schema, implementation), SerializationError);
+});
+
+test('accepts values at the bounds of their restrictions', () => {
+  const xml = new XMLSerializer().serializeToString(serialize(withReport({
+    instructedAmount: { '#': 0.12345, '@currency': 'EUR' },
+    remittance: 'x'.repeat(140),
+  }), schema, implementation));
+
+  assert.match(xml, />0.12345</);
+  assert.doesNotThrow(() => serialize(withAmount(123456789012345680), schema, implementation));
+  assert.doesNotThrow(() => serialize(withAmount(0), schema, implementation));
+  assert.doesNotThrow(() => serialize(withReport({ remittance: 'x' }), schema, implementation));
+  assert.doesNotThrow(() => serialize(withReport({ '@revision': 1, '@discount': 0 }), schema, implementation));
+  assert.doesNotThrow(() => serialize(withReport({ '@discount': 100 }), schema, implementation));
+});
+
+test('rejects values that violate their restrictions', () => {
+  const rejects = (changes: object) => assert.throws(() => serialize(withReport(changes), schema, implementation), SerializationError);
+
+  rejects({ priority: 'LOW' });
+  rejects({ '@chargeBearer': 'slev' });
+  rejects({ country: 'ch' });
+  rejects({ country: 'CHE' });
+  rejects({ instructedAmount: { '#': 1, '@currency': 'EURO' } });
+  rejects({ remittance: '' });
+  rejects({ remittance: 'x'.repeat(141) });
+  rejects({ instructedAmount: { '#': -0.01, '@currency': 'EUR' } });
+  rejects({ instructedAmount: { '#': 1.123456, '@currency': 'EUR' } });
+  rejects({ instructedAmount: { '#': 1e18, '@currency': 'EUR' } });
+  rejects({ instructedAmount: { '#': 1e21, '@currency': 'EUR' } });
+  rejects({ '@price': 9.999 });
+  rejects({ '@revision': 0 });
+  rejects({ '@discount': 101 });
+  rejects({ '@discount': -1 });
+  rejects({ note: { '#': 'hello', '@lang': 'en_US' } });
+});
+
+test('rejects documents that violate restrictions when parsing', () => {
+  const xml = fixture('builtin.xml');
+
+  assert.throws(() => parse(fromString(xml.replace('NORM', 'LOW')), schema), ValidationError);
+  assert.throws(() => parse(fromString(xml.replace('currency="EUR"', 'currency="eur"')), schema), ValidationError);
+  assert.throws(() => parse(fromString(xml.replace('1234.50000', '-1')), schema), ValidationError);
+  assert.throws(() => parse(fromString(xml.replace('revision="3"', 'revision="0"')), schema), ValidationError);
 });
