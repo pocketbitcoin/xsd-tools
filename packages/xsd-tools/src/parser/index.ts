@@ -3,6 +3,8 @@ import { type XsSchema, xsdSchema } from '../schema/index.js';
 import { ValidationError } from './error.js';
 import type { XMLDomDocument } from '../dom.js';
 
+export { ValidationError } from './error.js';
+
 export function parse(document: XMLDomDocument, schema?: XsSchema) {
   const effectiveSchema = schema || xsdSchema;
 

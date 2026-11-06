@@ -80,6 +80,10 @@ export type XsMinInclusive = {
   '@value': number,
 };
 
+export type XsMaxInclusive = {
+  '@value': number,
+};
+
 export type XsPattern = {
   '@value': string,
 };
@@ -98,6 +102,7 @@ export type XsRestriction = {
   xsFractionDigits?: XsFractionDigits,
   xsTotalDigits?: XsTotalDigits,
   xsMinInclusive?: XsMinInclusive,
+  xsMaxInclusive?: XsMaxInclusive,
   xsPattern?: XsPattern,
   xsMinLength?: XsMinLength,
   xsMaxLength?: XsMaxLength,

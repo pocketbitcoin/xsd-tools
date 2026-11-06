@@ -8,6 +8,10 @@
       <xs:element name="code" type="Code"/>
       <xs:element name="tag" type="xs:token" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="note" type="Note"/>
+      <xs:element name="instructedAmount" type="InstructedAmount"/>
+      <xs:element name="priority" type="Priority"/>
+      <xs:element name="country" type="CountryCode"/>
+      <xs:element name="remittance" type="Max140Text"/>
     </xs:sequence>
     <xs:attribute name="authenticate" type="xs:string" use="required"/>
     <xs:attribute name="signed" type="xs:boolean" use="required"/>
@@ -16,11 +20,20 @@
     <xs:attribute name="revision" type="xs:positiveInteger" use="required"/>
     <xs:attribute name="uri" type="xs:anyURI"/>
     <xs:attribute name="price" type="Amount"/>
+    <xs:attribute name="chargeBearer" type="ChargeBearer" use="required"/>
+    <xs:attribute name="discount" type="Percentage"/>
   </xs:complexType>
   <xs:complexType name="Note">
     <xs:simpleContent>
       <xs:extension base="xs:string">
         <xs:attribute name="lang" type="xs:language"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="InstructedAmount">
+    <xs:simpleContent>
+      <xs:extension base="CurrencyAndAmount">
+        <xs:attribute name="currency" type="CurrencyCode" use="required"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -34,5 +47,47 @@
   </xs:simpleType>
   <xs:simpleType name="Code">
     <xs:restriction base="xs:token"/>
+  </xs:simpleType>
+  <xs:simpleType name="CurrencyAndAmount">
+    <xs:restriction base="xs:decimal">
+      <xs:fractionDigits value="5"/>
+      <xs:totalDigits value="18"/>
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CurrencyCode">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z]{3,3}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CountryCode">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z]{2,2}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Max140Text">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="140"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Percentage">
+    <xs:restriction base="xs:unsignedByte">
+      <xs:maxInclusive value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Priority">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="HIGH"/>
+      <xs:enumeration value="NORM"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ChargeBearer">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DEBT"/>
+      <xs:enumeration value="CRED"/>
+      <xs:enumeration value="SHAR"/>
+      <xs:enumeration value="SLEV"/>
+    </xs:restriction>
   </xs:simpleType>
 </xs:schema>

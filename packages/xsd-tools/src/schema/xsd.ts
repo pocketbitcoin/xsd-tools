@@ -256,6 +256,11 @@ export const schema: XsSchema = {
         '@minOccurs': 0,
         '@maxOccurs': 1,
       }, {
+        '@name': 'xs:maxInclusive',
+        '@type': 'xs:maxInclusive',
+        '@minOccurs': 0,
+        '@maxOccurs': 1,
+      }, {
         '@name': 'xs:pattern',
         '@type': 'xs:pattern',
         '@minOccurs': 0,
@@ -318,7 +323,18 @@ export const schema: XsSchema = {
     },
     xsAttribute: [{
       '@name': 'value',
-      '@type': 'xs:integer',
+      '@type': 'xs:decimal',
+      '@use': 'required',
+    }],
+    xsAttributeGroup: [],
+  }, {
+    '@name': 'xs:maxInclusive',
+    xsSequence: {
+      xsElement: [],
+    },
+    xsAttribute: [{
+      '@name': 'value',
+      '@type': 'xs:decimal',
       '@use': 'required',
     }],
     xsAttributeGroup: [],

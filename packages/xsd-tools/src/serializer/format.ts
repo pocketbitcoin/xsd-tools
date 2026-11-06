@@ -1,4 +1,4 @@
-import { resolveRestriction, resolveType, type ResolvedType, type XsRestriction, type XsSchema } from '../schema/index.js';
+import { checkFacets, resolveRestriction, resolveType, type ResolvedType, type XsRestriction, type XsSchema } from '../schema/index.js';
 import { SerializationError } from './error.js';
 
 // inverse of parseText in parser/simple-type.ts
@@ -10,7 +10,50 @@ export function formatWithXsRestriction(value: unknown, xsRestriction: XsRestric
   return formatValue(value, resolveRestriction(xsRestriction, xsSchema), path);
 }
 
-function formatValue(value: unknown, { kind, fractionDigits }: ResolvedType, path: string): string {
+function formatValue(value: unknown, type: ResolvedType, path: string): string {
+  const text = formatText(value, type, path);
+  const error = checkFacets(text, type);
+
+  if (error !== undefined) {
+    throw new SerializationError(error, path);
+  }
+
+  return text;
+}
+
+// String() uses exponent notation below 1e-6 and from 1e21, which xs:decimal does not allow
+function toDecimalString(value: number) {
+  const [mantissa = '', exponent] = String(Math.abs(value)).split('e');
+
+  if (exponent === undefined) {
+    return String(value);
+  }
+
+  const [integer = '', fraction = ''] = mantissa.split('.');
+  const digits = integer + fraction;
+  const point = integer.length + Number(exponent);
+
+  const unsigned = point <= 0
+    ? `0.${'0'.repeat(-point)}${digits}`
+    : point >= digits.length
+      ? digits + '0'.repeat(point - digits.length)
+      : `${digits.slice(0, point)}.${digits.slice(point)}`;
+
+  return value < 0 ? `-${unsigned}` : unsigned;
+}
+
+// never rounds, so that excess fraction digits fail validation
+function padFraction(text: string, fractionDigits: number) {
+  const [integer, fraction = ''] = text.split('.');
+
+  if (fraction.length >= fractionDigits) {
+    return text;
+  }
+
+  return `${integer}.${fraction.padEnd(fractionDigits, '0')}`;
+}
+
+function formatText(value: unknown, { kind, fractionDigits }: ResolvedType, path: string): string {
   if (value === undefined || value === null) {
     throw new SerializationError('value required', path);
   }
@@ -20,7 +63,7 @@ function formatValue(value: unknown, { kind, fractionDigits }: ResolvedType, pat
       throw new SerializationError(`expected integer, got ${String(value)}`, path);
     }
 
-    return String(value);
+    return toDecimalString(value);
   }
 
   if (kind === 'decimal') {
@@ -28,11 +71,9 @@ function formatValue(value: unknown, { kind, fractionDigits }: ResolvedType, pat
       throw new SerializationError(`expected decimal, got ${String(value)}`, path);
     }
 
-    if (fractionDigits !== undefined) {
-      return value.toFixed(fractionDigits);
-    }
+    const text = toDecimalString(value);
 
-    return String(value);
+    return fractionDigits === undefined ? text : padFraction(text, fractionDigits);
   }
 
   if (kind === 'boolean') {

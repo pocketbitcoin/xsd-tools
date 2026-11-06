@@ -22,5 +22,5 @@ export function parseWithXsAttribute(element: XMLDomElement, xsAttribute: XsAttr
     return parseInt(value.trim(), 10);
   }
 
-  return parseText(value, resolveType(xsAttribute['@type'], xsSchema).kind);
+  return parseText(value, resolveType(xsAttribute['@type'], xsSchema), element);
 }
