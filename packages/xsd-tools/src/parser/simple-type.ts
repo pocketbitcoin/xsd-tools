@@ -1,4 +1,4 @@
-import { checkFacets, resolveRestriction, resolveType, type ResolvedType, type XsSchema, type XsSimpleType } from '../schema/index.js';
+import { checkFacets, resolveRestriction, splitTimezone, toNumber, resolveType, type ResolvedType, type XsSchema, type XsSimpleType } from '../schema/index.js';
 import type { XMLDomElement } from '../dom.js';
 import { ValidationError } from './error.js';
 
@@ -29,20 +29,20 @@ export function parseText(text: string, type: ResolvedType, element: XMLDomEleme
     throw new ValidationError(error, element);
   }
 
-  if (kind === 'integer') {
-    return parseInt(value, 10);
-  }
-
-  if (kind === 'decimal') {
-    return parseFloat(value);
+  // the text passed checkFacets, so it is in the lexical space of its kind
+  if (kind === 'integer' || kind === 'decimal' || kind === 'float') {
+    return toNumber(value);
   }
 
   if (kind === 'boolean') {
     return value === 'true' || value === '1';
   }
 
-  if (kind === 'date' || kind === 'dateTime') {
-    return new Date(value);
+  // dates and times keep their local part and timezone apart, see XsDate, XsTime and XsDateTime
+  if (kind === 'date' || kind === 'time' || kind === 'dateTime') {
+    const { value: local, tz } = splitTimezone(value);
+
+    return tz === undefined ? { [kind]: local } : { [kind]: local, tz };
   }
 
   return value;

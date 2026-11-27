@@ -1,7 +1,13 @@
 import type { XsRestriction, XsSchema } from './types.js';
 
 // how a value of a built-in xs:* type is represented in javascript
-export type BuiltinKind = 'string' | 'integer' | 'decimal' | 'boolean' | 'date' | 'dateTime';
+export type BuiltinKind = 'string' | 'integer' | 'decimal' | 'float' | 'boolean' | 'date' | 'time' | 'dateTime';
+
+// dates and times keep their local part and timezone apart, since a javascript Date can neither hold
+// a date without a time nor keep a timezone offset. the local parts are iso 8601 strings, tz is Z or ±hh:mm
+export type XsDate = { date: string, tz?: string };
+export type XsTime = { time: string, tz?: string };
+export type XsDateTime = { dateTime: string, tz?: string };
 
 // the value space of built-in types, as defined by the xsd spec
 const builtinTypes: Record<string, ResolvedType> = {
@@ -19,10 +25,11 @@ const builtinTypes: Record<string, ResolvedType> = {
   'xs:unsignedShort': { kind: 'integer', minInclusive: 0, maxInclusive: 65535 },
   'xs:unsignedByte': { kind: 'integer', minInclusive: 0, maxInclusive: 255 },
   'xs:decimal': { kind: 'decimal' },
-  'xs:float': { kind: 'decimal' },
-  'xs:double': { kind: 'decimal' },
+  'xs:float': { kind: 'float' },
+  'xs:double': { kind: 'float' },
   'xs:boolean': { kind: 'boolean' },
   'xs:date': { kind: 'date' },
+  'xs:time': { kind: 'time' },
   'xs:dateTime': { kind: 'dateTime' },
   'xs:language': { kind: 'string', patterns: ['[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'] },
 };

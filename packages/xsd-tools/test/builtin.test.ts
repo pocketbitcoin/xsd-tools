@@ -24,7 +24,7 @@ const report = {
     '@authenticate': 'yes',
     '@signed': true,
     '@amount': 1.5,
-    '@issued': new Date('2024-02-29'),
+    '@issued': { date: '2024-02-29' },
     '@revision': 3,
     '@price': 9.9,
     '@chargeBearer': 'SLEV',
