@@ -1,4 +1,5 @@
 import type { ResolvedType } from './builtin.js';
+import { checkLexical, toNumber } from './lexical.js';
 
 const patterns = new Map<string, RegExp>();
 
@@ -24,6 +25,12 @@ function countDigits(text: string) {
 }
 
 export function checkFacets(text: string, type: ResolvedType): string | undefined {
+  const lexicalError = checkLexical(text, type.kind);
+
+  if (lexicalError !== undefined) {
+    return lexicalError;
+  }
+
   if (type.enumeration && !type.enumeration.includes(text)) {
     return `expected one of ${type.enumeration.join(', ')}, got ${text}`;
   }
@@ -44,25 +51,28 @@ export function checkFacets(text: string, type: ResolvedType): string | undefine
     return `expected at most ${type.maxLength} characters, got ${length}`;
   }
 
-  if (type.kind !== 'integer' && type.kind !== 'decimal') {
+  if (type.kind === 'integer' || type.kind === 'decimal') {
+    const digits = countDigits(text);
+
+    if (type.totalDigits !== undefined && digits.totalDigits > type.totalDigits) {
+      return `expected at most ${type.totalDigits} digits, got ${text}`;
+    }
+
+    if (type.fractionDigits !== undefined && digits.fractionDigits > type.fractionDigits) {
+      return `expected at most ${type.fractionDigits} fraction digits, got ${text}`;
+    }
+  } else if (type.kind !== 'float') {
     return undefined;
   }
 
-  const digits = countDigits(text);
+  // NaN compares false against every bound, so it must not slip through a range
+  const number = toNumber(text);
 
-  if (type.totalDigits !== undefined && digits.totalDigits > type.totalDigits) {
-    return `expected at most ${type.totalDigits} digits, got ${text}`;
-  }
-
-  if (type.fractionDigits !== undefined && digits.fractionDigits > type.fractionDigits) {
-    return `expected at most ${type.fractionDigits} fraction digits, got ${text}`;
-  }
-
-  if (type.minInclusive !== undefined && Number(text) < type.minInclusive) {
+  if (type.minInclusive !== undefined && !(number >= type.minInclusive)) {
     return `expected at least ${type.minInclusive}, got ${text}`;
   }
 
-  if (type.maxInclusive !== undefined && Number(text) > type.maxInclusive) {
+  if (type.maxInclusive !== undefined && !(number <= type.maxInclusive)) {
     return `expected at most ${type.maxInclusive}, got ${text}`;
   }
 

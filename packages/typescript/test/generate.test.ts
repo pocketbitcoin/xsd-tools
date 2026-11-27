@@ -34,13 +34,18 @@ export const report: Report = {
   '@authenticate': 'yes',
   '@signed': true,
   '@amount': 1.5,
-  '@issued': new Date('2024-02-29'),
+  '@issued': { date: '2024-02-29' },
   '@revision': 3,
   '@chargeBearer': 'SLEV',
 };
 
 // @ts-expect-error xs:boolean attributes are booleans
 export const wrong: Report = { ...report, '@signed': 'true' };
+
+export const withTimezone: Report = { ...report, '@issued': { date: '2024-02-29', tz: '+01:00' } };
+
+// @ts-expect-error xs:date attributes are { date, tz? } objects
+export const wrongDate: Report = { ...report, '@issued': '2024-02-29' };
 
 // @ts-expect-error enumerations only accept their values
 export const wrongPriority: Report = { ...report, priority: 'LOW' };
@@ -74,6 +79,6 @@ test('generated parse and serialize round-trip a document', async () => {
 
   assert.equal(parsed.report['@signed'], true);
   assert.equal(parsed.report['@revision'], 3);
-  assert.ok(parsed.report['@issued'] instanceof Date);
+  assert.deepEqual(parsed.report['@issued'], { date: '2024-02-29' });
   assert.deepEqual(parse(serialize(parsed, new DOMImplementation())), parsed);
 });

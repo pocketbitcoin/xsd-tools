@@ -10,8 +10,8 @@ const invoice = {
   invoice: {
     payee: { address: 'Main St <1> & "Co"' },
     line: [{ '#': 'apples', '@unit': 'kg' }, { '#': 'pears' }],
-    created: new Date('2024-02-29T12:34:56.789Z'),
-    issued: new Date('2024-02-29'),
+    created: { dateTime: '2024-02-29T12:34:56.789', tz: 'Z' },
+    issued: { date: '2024-02-29' },
     paid: false,
     count: 0,
     amount: 10.5,
